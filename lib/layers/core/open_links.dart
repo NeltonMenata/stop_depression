@@ -62,7 +62,7 @@ void abrirVideosAlimentacaoSaudavel() async {
 
 void abrirTecnicasRelaxamento() async {
   const webUrl =
-      'https://www.mindful.org/how-to-relax-your-mind-and-body/'; // Site focado em relaxamento
+      'https://www.essentialnutrition.com.br/conteudos/tecnicas-de-relaxamento/'; // Site focado em relaxamento
 
   if (await canLaunchUrl(Uri.parse(webUrl))) {
     await launchUrl(Uri.parse(webUrl));

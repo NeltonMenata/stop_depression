@@ -112,7 +112,116 @@ class _TherapyPageState extends State<TherapyPage> {
                       ),
                     ),
                   ),
-                )
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                TextButton(
+                  onPressed: abrirVideosAlimentacaoSaudavel,
+                  child: Container(
+                    width: width * .6,
+                    height: width * .45,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/alimentacao.jpg'),
+                          opacity: .8),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Alimentação Saudável',
+                        style: TextStyle(
+                            fontSize: width * .06,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                TextButton(
+                  onPressed: abrirTecnicasRelaxamento,
+                  child: Container(
+                    width: width * .6,
+                    height: width * .45,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/relaxamento.jpg'),
+                          opacity: .8),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Tecnicas de Relaxamento',
+                        style: TextStyle(
+                            fontSize: width * .06,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                TextButton(
+                  onPressed: abrirVideosExercicios,
+                  child: Container(
+                    width: width * .6,
+                    height: width * .45,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image:
+                              AssetImage('assets/images/exercicio-fisico.jpg'),
+                          opacity: .8),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Exercícios Físicos',
+                        style: TextStyle(
+                            fontSize: width * .06,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                TextButton(
+                  onPressed: abrirDiarioOnline,
+                  child: Container(
+                    width: width * .6,
+                    height: width * .45,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/diario.webp'),
+                          opacity: .8),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Diário Online',
+                        style: TextStyle(
+                            fontSize: width * .06,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
               ]),
         ),
       ),
