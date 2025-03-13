@@ -14,6 +14,8 @@ class _TherapyPageState extends State<TherapyPage> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
+    const multiHeight = .6;
+    const multiWidth = .85;
 
     return Scaffold(
       backgroundColor: Colors.blueAccent,
@@ -24,22 +26,23 @@ class _TherapyPageState extends State<TherapyPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Terapia',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
+                // const Text(
+                //   'Terapia',
+                //   style: TextStyle(
+                //     color: Colors.white,
+                //     fontSize: 25,
+                //     fontWeight: FontWeight.w900,
+                //   ),
+                // ),
+
                 const SizedBox(
                   height: 20,
                 ),
                 TextButton(
                   onPressed: abrirAppRespiracao,
                   child: Container(
-                    width: width * .6,
-                    height: width * .45,
+                    width: width * multiWidth,
+                    height: width * multiHeight,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: const DecorationImage(
@@ -65,8 +68,8 @@ class _TherapyPageState extends State<TherapyPage> {
                 TextButton(
                   onPressed: abrirBiblia,
                   child: Container(
-                    width: width * .6,
-                    height: width * .45,
+                    width: width * multiWidth,
+                    height: width * multiHeight,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: const DecorationImage(
@@ -92,8 +95,8 @@ class _TherapyPageState extends State<TherapyPage> {
                 TextButton(
                   onPressed: abrirMusicasRelaxantes,
                   child: Container(
-                    width: width * .6,
-                    height: width * .45,
+                    width: width * multiWidth,
+                    height: width * multiHeight,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: const DecorationImage(
@@ -119,8 +122,8 @@ class _TherapyPageState extends State<TherapyPage> {
                 TextButton(
                   onPressed: abrirVideosAlimentacaoSaudavel,
                   child: Container(
-                    width: width * .6,
-                    height: width * .45,
+                    width: width * multiWidth,
+                    height: width * multiHeight,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: const DecorationImage(
@@ -146,8 +149,8 @@ class _TherapyPageState extends State<TherapyPage> {
                 TextButton(
                   onPressed: abrirTecnicasRelaxamento,
                   child: Container(
-                    width: width * .6,
-                    height: width * .45,
+                    width: width * multiWidth,
+                    height: width * multiHeight,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: const DecorationImage(
@@ -173,8 +176,8 @@ class _TherapyPageState extends State<TherapyPage> {
                 TextButton(
                   onPressed: abrirVideosExercicios,
                   child: Container(
-                    width: width * .6,
-                    height: width * .45,
+                    width: width * multiWidth,
+                    height: width * multiHeight,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: const DecorationImage(
@@ -201,8 +204,8 @@ class _TherapyPageState extends State<TherapyPage> {
                 TextButton(
                   onPressed: abrirDiarioOnline,
                   child: Container(
-                    width: width * .6,
-                    height: width * .45,
+                    width: width * multiWidth,
+                    height: width * multiHeight,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: const DecorationImage(

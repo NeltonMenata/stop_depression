@@ -38,6 +38,7 @@ dependencies:
   video_player: ^2.7.2
   flutter_launcher_icons: ^0.13.1
   url_launcher: ^6.3.1
+  just_audio: ^0.9.46
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
     - assets/images/
     - assets/icon/icon.png
     - assets/video.gif
+    - assets/video_main.gif
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

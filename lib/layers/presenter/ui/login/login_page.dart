@@ -28,15 +28,16 @@ class _LoginPageState extends State<LoginPage> {
     final fontSizeTitleLabel = width * .045;
 
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
       body: Stack(
-        fit: StackFit.expand,
+        //fit: StackFit.expand,
         children: [
-          Image.asset(
-            'assets/images/bg-splash.jpg',
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-          ),
+          // Image.asset(
+          //   'assets/images/bg-splash.jpg',
+          //   fit: BoxFit.cover,
+          //   width: double.infinity,
+          //   height: double.infinity,
+          // ),
           SingleChildScrollView(
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -62,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         Text(
                           "Inicie sua Sessão no Stop Depression",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.blue.shade900,
                               fontWeight: FontWeight.bold,
@@ -79,23 +81,23 @@ class _LoginPageState extends State<LoginPage> {
                         Text(
                           "Usuario",
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontSize: fontSizeTitleLabel,
                               fontWeight: FontWeight.w900),
                         ),
                         TextField(
                           controller: username,
                           keyboardType: TextInputType.emailAddress,
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           decoration: const InputDecoration(
-                            hintStyle: TextStyle(color: Colors.white60),
+                            hintStyle: TextStyle(color: Colors.grey),
                             disabledBorder:
                                 OutlineInputBorder(borderSide: BorderSide()),
                             border: OutlineInputBorder(),
                             hintText: "Email",
                             suffixIcon: Icon(
                               Icons.person_outlined,
-                              color: Colors.white,
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -111,16 +113,16 @@ class _LoginPageState extends State<LoginPage> {
                         Text(
                           "Senha",
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontSize: fontSizeTitleLabel,
                               fontWeight: FontWeight.w900),
                         ),
                         TextField(
                           controller: password,
                           obscureText: hiddenPassword,
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                            hintStyle: const TextStyle(color: Colors.white60),
+                            hintStyle: const TextStyle(color: Colors.grey),
                             border: const OutlineInputBorder(),
                             hintText: "Palavra-passe",
                             suffixIcon: IconButton(
@@ -131,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                                 icon: const Icon(
                                   Icons.remove_red_eye_outlined,
-                                  color: Colors.white,
+                                  color: Colors.grey,
                                 )),
                           ),
                           onSubmitted: (value) {},
