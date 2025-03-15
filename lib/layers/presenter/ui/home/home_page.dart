@@ -1,6 +1,7 @@
 import 'package:stop_depression/layers/presenter/routes/Routes.dart';
 import 'package:stop_depression/layers/presenter/ui/home/button_component.dart';
 import 'package:stop_depression/layers/presenter/ui/home/table_component.dart';
+import 'package:stop_depression/layers/presenter/ui/test/test_view.dart';
 import 'package:stop_depression/layers/presenter/ui/therapy/therapy_page.dart';
 import 'package:stop_depression/layers/presenter/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -80,38 +81,51 @@ class _HomePageState extends State<HomePage>
                 ),
                 ListTile(
                   title: Text(
-                    "Fatores da depressao",
+                    "Perfil",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: width * .04,
                     ),
                   ),
                   trailing: Icon(
-                    Icons.group_add_outlined,
-                    size: width * .10,
+                    Icons.person,
+                    size: width * .08,
                   ),
                   onTap: () {
                     //Navigator.of(context).pushNamed(Routes.CREATE_WORKER);
                   },
                 ),
-                Visibility(
-                  visible: true,
-                  child: ListTile(
-                    title: Text(
-                      "Consequencias da depressao",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: width * .04,
-                      ),
+                ListTile(
+                  title: Text(
+                    "Descobrir",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: width * .04,
                     ),
-                    trailing: Icon(
-                      Icons.group,
-                      size: width * .10,
-                    ),
-                    onTap: () {
-                      // Navigator.of(context).pushNamed(Routes.VIEW_MANAGER);
-                    },
                   ),
+                  trailing: Icon(
+                    Icons.search,
+                    size: width * .08,
+                  ),
+                  onTap: () {
+                    // Navigator.of(context).pushNamed(Routes.VIEW_MANAGER);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    "Ajustes",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: width * .04,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.settings,
+                    size: width * .08,
+                  ),
+                  onTap: () {
+                    // Navigator.of(context).pushNamed(Routes.VIEW_MANAGER);
+                  },
                 ),
                 const Spacer(),
                 ListTile(
@@ -126,7 +140,7 @@ class _HomePageState extends State<HomePage>
                   trailing: Icon(
                     Icons.logout_outlined,
                     color: Colors.red,
-                    size: width * .10,
+                    size: width * .08,
                   ),
                   onTap: () async {
                     Navigator.pushNamedAndRemoveUntil(
@@ -166,36 +180,38 @@ class _HomePageState extends State<HomePage>
           controller: tabController,
           children: [
             Container(
+              width: double.infinity,
               color: Colors.blue.shade300,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              child: Stack(
                 children: [
-                  Image.asset("assets/video_main.gif"),
-                  const Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(7.0),
-                      child: Center(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "Explore, aprenda e cuide da sua saúde mental",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Text(
-                              "Seja bem-vindo! Aqui voçê encontrará apoio, conhecimento e ferramentas para compreender e superar a depressão.",
-                              style: TextStyle(color: Colors.white),
-                              textAlign: TextAlign.center,
-                            )
-                          ],
-                        ),
+                  Image.asset(
+                    "assets/video.gif",
+                    fit: BoxFit.fitWidth,
+                    width: double.infinity,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(7.0),
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Explore, aprenda e cuide da sua saúde mental",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25),
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Text(
+                            "Seja bem-vindo! Aqui voçê encontrará apoio, conhecimento e ferramentas para compreender e superar a depressão.",
+                            style: TextStyle(color: Colors.white),
+                            textAlign: TextAlign.center,
+                          )
+                        ],
                       ),
                     ),
                   )
@@ -206,9 +222,7 @@ class _HomePageState extends State<HomePage>
               color: Colors.amber,
             ),
             const TherapyPage(),
-            const TableComponent(
-              color: Colors.green,
-            )
+            const TestView()
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

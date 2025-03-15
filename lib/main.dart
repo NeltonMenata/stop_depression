@@ -80,10 +80,10 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextFormField(
                   controller: _passwordController,
-                  decoration: InputDecoration(labelText: "Senha"),
+                  decoration: const InputDecoration(labelText: "Senha"),
                   obscureText: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -92,10 +92,10 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _login,
-                  child: Text("Entrar"),
+                  child: const Text("Entrar"),
                 ),
               ],
             ),

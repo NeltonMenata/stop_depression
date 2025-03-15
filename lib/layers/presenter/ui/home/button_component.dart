@@ -27,15 +27,12 @@ class ButtonComponent extends StatelessWidget {
       children: [
         TextButton(
           onPressed: action,
-          child: Card(
-            color: Colors.transparent,
-            child: SizedBox(
-              height: height,
-              width: width * multiWidth,
-              child: Image.asset(
-                urlImage,
-                fit: BoxFit.fitHeight,
-              ),
+          child: SizedBox(
+            height: height,
+            width: width * multiWidth,
+            child: Image.asset(
+              urlImage,
+              fit: BoxFit.fitHeight,
             ),
           ),
         ),
