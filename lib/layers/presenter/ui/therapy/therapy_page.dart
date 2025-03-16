@@ -18,7 +18,7 @@ class _TherapyPageState extends State<TherapyPage> {
     const multiWidth = .85;
 
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: Colors.indigo.shade300,
       body: Center(
         child: SingleChildScrollView(
           child: Column(

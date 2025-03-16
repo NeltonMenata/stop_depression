@@ -24,11 +24,11 @@ class _LoginPageState extends State<LoginPage> {
     const paddingLeft = 15.0;
     final paddingTop = height * 0.07;
     const paddingBottom = 15.0;
-    final fontSizeTitle = width * .08;
+    final fontSizeTitle = width * .06;
     final fontSizeTitleLabel = width * .045;
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.blue.shade300,
       body: Stack(
         //fit: StackFit.expand,
         children: [
@@ -79,25 +79,25 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Usuario",
+                          "Usuário",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.blue.shade900,
                               fontSize: fontSizeTitleLabel,
                               fontWeight: FontWeight.w900),
                         ),
                         TextField(
                           controller: username,
                           keyboardType: TextInputType.emailAddress,
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.white),
                           decoration: const InputDecoration(
-                            hintStyle: TextStyle(color: Colors.grey),
+                            hintStyle: TextStyle(color: Colors.white),
                             disabledBorder:
                                 OutlineInputBorder(borderSide: BorderSide()),
                             border: OutlineInputBorder(),
                             hintText: "Email",
                             suffixIcon: Icon(
                               Icons.person_outlined,
-                              color: Colors.grey,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -113,16 +113,16 @@ class _LoginPageState extends State<LoginPage> {
                         Text(
                           "Senha",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.blue.shade900,
                               fontSize: fontSizeTitleLabel,
                               fontWeight: FontWeight.w900),
                         ),
                         TextField(
                           controller: password,
                           obscureText: hiddenPassword,
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
-                            hintStyle: const TextStyle(color: Colors.grey),
+                            hintStyle: const TextStyle(color: Colors.white),
                             border: const OutlineInputBorder(),
                             hintText: "Palavra-passe",
                             suffixIcon: IconButton(
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                                 icon: const Icon(
                                   Icons.remove_red_eye_outlined,
-                                  color: Colors.grey,
+                                  color: Colors.white,
                                 )),
                           ),
                           onSubmitted: (value) {},
@@ -142,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                               child: const Text(
-                                "Esqueceu a palavra-passe?",
+                                "",
                                 style: TextStyle(color: Colors.grey),
                               ),
                               onPressed: () {}),

@@ -13,13 +13,14 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blue.shade300,
       body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.only(bottom: 0),
               child: SizedBox(
                 height: 100,
                 width: 100,
@@ -31,23 +32,23 @@ class _SplashPageState extends State<SplashPage> {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(10),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
               child: Text(
                 "Stop Depression",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.blue.shade900,
                   fontWeight: FontWeight.w900,
                   fontSize: 30,
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(10),
+            Center(
               child: Text(
-                "Tenha o controle da sua saude na Palma da Mão!",
+                "Tenha o controle da sua saúde na Palma da Mão!",
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.blue.shade900,
                   fontSize: 15,
                   fontStyle: FontStyle.italic,
                 ),

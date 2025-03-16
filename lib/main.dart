@@ -15,10 +15,11 @@ class MyApp extends StatelessWidget {
       routes: Routes.routes(context),
       initialRoute: Routes.SPLASH,
       theme: ThemeData(
-          colorScheme: ColorScheme.light(
-              primary: Colors.blue.shade900,
-              brightness: Brightness.light,
-              secondary: Colors.blue.shade700)),
+        colorScheme: ColorScheme.light(
+            primary: Colors.blue.shade900,
+            brightness: Brightness.light,
+            secondary: Colors.blue.shade700),
+      ),
       //
       //home: LoginPage(),
     );
@@ -26,6 +27,8 @@ class MyApp extends StatelessWidget {
 }
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -44,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
       if (email == "teste@email.com" && password == "123456") {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -65,13 +68,13 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Login",
+                const Text("Login",
                     style:
                         TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
                   controller: _emailController,
-                  decoration: InputDecoration(labelText: "Email"),
+                  decoration: const InputDecoration(labelText: "Email"),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -108,6 +111,8 @@ class _LoginPageState extends State<LoginPage> {
 
 // Tela inicial após o login bem-sucedido
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }

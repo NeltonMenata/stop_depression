@@ -65,11 +65,15 @@ class _HomePageState extends State<HomePage>
       },
       child: Scaffold(
         drawer: Drawer(
+          backgroundColor: Colors.blue.shade300,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: Column(
               children: [
                 UserAccountsDrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade600
+                  ),
                   accountName: const Text(
                     "Usuario",
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -133,13 +137,13 @@ class _HomePageState extends State<HomePage>
                     "Terminar Sessão",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.red,
+                      color: Colors.blue.shade900,
                       fontSize: width * .04,
                     ),
                   ),
                   trailing: Icon(
                     Icons.logout_outlined,
-                    color: Colors.red,
+                    color: Colors.blue.shade900,
                     size: width * .08,
                   ),
                   onTap: () async {
@@ -218,8 +222,8 @@ class _HomePageState extends State<HomePage>
                 ],
               ),
             ),
-            const TableComponent(
-              color: Colors.amber,
+            TableComponent(
+              color: Colors.indigo.shade300,
             ),
             const TherapyPage(),
             const TestView()
@@ -233,7 +237,7 @@ class _HomePageState extends State<HomePage>
           currentIndex: index,
           items: [
             BottomNavigationBarItem(
-              backgroundColor: Colors.blue.shade900,
+              backgroundColor: Colors.blue.shade300,
               label: 'Inicio',
               icon: IconButton(
                 icon: Icon(Icons.home),
@@ -244,37 +248,38 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             BottomNavigationBarItem(
-                backgroundColor: Colors.blue.shade900,
+                backgroundColor: Colors.blue.shade300,
                 label: '',
                 icon: ButtonComponent(
                   action: () {
                     tabController.animateTo(1);
                     setIndex(1);
                   },
+                  urlImage: 'assets/images/quiz.jpeg',
                   title: "Quiz",
                   height: 30,
                 )),
             BottomNavigationBarItem(
-                backgroundColor: Colors.blue.shade900,
+                backgroundColor: Colors.blue.shade300,
                 label: '',
                 icon: ButtonComponent(
                   action: () {
                     tabController.animateTo(2);
                     setIndex(2);
                   },
-                  urlImage: 'assets/images/terapia.jpg',
+                  urlImage: 'assets/images/terapia.jpeg',
                   title: "Terapia",
                   height: 30,
                 )),
             BottomNavigationBarItem(
-                backgroundColor: Colors.blue.shade900,
+                backgroundColor: Colors.blue.shade300,
                 label: '',
                 icon: ButtonComponent(
                   action: () {
                     tabController.animateTo(3);
                     setIndex(3);
                   },
-                  urlImage: "assets/images/teste.jpg",
+                  urlImage: "assets/images/teste.jpeg",
                   height: 30,
                   title: "Teste",
                 )),

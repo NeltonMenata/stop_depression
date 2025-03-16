@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ButtonComponent extends StatelessWidget {
   const ButtonComponent(
       {super.key,
-      this.urlImage = "assets/images/quiz.png",
+      this.urlImage = "assets/images/quiz.jpeg",
       this.height = 100,
       this.multiWidth = .36,
       this.fontSize = 14.0,
@@ -30,9 +30,12 @@ class ButtonComponent extends StatelessWidget {
           child: SizedBox(
             height: height,
             width: width * multiWidth,
-            child: Image.asset(
-              urlImage,
-              fit: BoxFit.fitHeight,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                urlImage,
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
         ),
