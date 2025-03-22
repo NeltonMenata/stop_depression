@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.SPLASH,
       theme: ThemeData(
         colorScheme: ColorScheme.light(
-            primary: Colors.blue.shade900,
+            primary: Color.fromARGB(255, 13, 151, 161),
             brightness: Brightness.light,
-            secondary: Colors.blue.shade700),
+            secondary: Color.fromARGB(255, 14, 113, 118)),
       ),
       //
       //home: LoginPage(),
