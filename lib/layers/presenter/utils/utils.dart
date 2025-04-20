@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Utils {
-  static const assetLogo = "assets/icon/icon.png";
+  static const assetLogo = "assets/images/logo.png";
 }
-
+const greenDark = Color.fromARGB(255, 13, 107, 130);
+const greenLight = Color.fromARGB(255, 15, 152, 187);
+const greenUltraLight = Color.fromARGB(255, 33, 233, 243);
 String reverse(String value) {
   var valueReverse = "";
   var valueLength = value.length - 1;

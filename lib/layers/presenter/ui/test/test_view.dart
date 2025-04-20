@@ -9,8 +9,15 @@ class TestView extends StatefulWidget {
   State<TestView> createState() => _TestViewState();
 }
 
+int currentTest = 0;
+
 class _TestViewState extends State<TestView> {
-  int currentTest = 0;
+  //int currentTest = 0;
+  @override
+  void initState() {
+    currentTest = 0;
+    super.initState();
+  }
 
   final listTest = [
     TestModel(
@@ -124,95 +131,191 @@ class _TestViewState extends State<TestView> {
     "Seus sintomas indicam melancolia, algo passageiro. Atividades prazerosas, exercícios, sono regulado e apoio emocional podem ajudar. Vamos acompanhar e, se precisar, ajustamos o cuidado juntos.",
     "Você apresenta sinais de depressão leve, mas com mudanças no estilo de vida, como exercícios, boa alimentação, sono regulado e apoio emocional, é possível melhorar significativamente. Vamos superar juntos.",
     "Você tem sintomas de depressão moderada, mas com terapia, rotina saudável, atividades prazerosas e apoio, ter uma alimentação saudável é possível melhorar. Vamos trabalhar juntos para encontrar o melhor caminho para você.",
-    "Seus sintomas são mais intensos, você precisa de ajuda de um profissional, contacte imediatamente o nosso psicólogo.Com acompanhamento próximo, terapia e suporte adequado, há caminhos para você se sentir melhor. Vamos enfrentar isso juntos, passo a passo."
+    "Seus sintomas são mais intensos, você precisa de ajuda de um profissional, contacte imediatamente o nosso psicólogo. Com acompanhamento próximo, terapia e suporte adequado, há caminhos para você se sentir melhor. Vamos enfrentar isso juntos, passo a passo."
   ];
 
   int indexMsg = 0;
 
+  String progressMsg = "Você está indo bem 😊";
+  bool showProgressMsg = false;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.indigo.shade300,
-      child: Column(
-        
-        children: [
-          TestComponent(
-            action: () {
-              Future.delayed(const Duration(seconds: 1), () {
-                print(listTest[currentTest].value);
-                setState(() {
-                  if (!(currentTest == (listTest.length - 1))) {
-                    currentTest++;
-                  }
-                  int currentValue = 0;
-                  listTest.forEach((element) {
-                    currentValue += element.value;
+    final width = MediaQuery.sizeOf(context).width;
+    if (currentTest == 1) {
+      setState(() {
+        showProgressMsg = true;
+      });
+    } else if (currentTest == 6) {
+      setState(() {
+        progressMsg = "Está sendo um máximo o seu dinamismo 💪🏽";
+        showProgressMsg = true;
+      });
+    } else if (currentTest == 10) {
+      setState(() {
+        progressMsg = "Continue com essa intensidade 🤩";
+        showProgressMsg = true;
+      });
+    } else if (currentTest == 16) {
+      setState(() {
+        progressMsg = "Já falta pouco 👏🏽";
+        showProgressMsg = true;
+      });
+    } else {
+      setState(() {
+        showProgressMsg = false;
+      });
+    }
+
+    return Stack(
+      //mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: double.infinity,
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Visibility(
+                visible: showProgressMsg,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        print("############ clicou ##########");
+                        setState(() {
+                          showProgressMsg = false;
+                        });
+                      },
+                      child: Container(
+                          width: width * .38,
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Colors.blue.withOpacity(.5),
+                                    Colors.pink.withOpacity(.8)
+                                  ])),
+                          child: Text(
+                            progressMsg,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                height: .95,
+                                fontSize: 12.5),
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+              TestComponent(
+                action: () {
+                  Future.delayed(const Duration(seconds: 0), () {
+                    //print(listTest[currentTest].value);
+                    setState(() {
+                      if (!(currentTest == (listTest.length - 1))) {
+                        currentTest++;
+                      }
+                      int currentValue = 0;
+                      for (var element in listTest) {
+                        currentValue += element.value;
+                      }
+                      resultTest = currentValue;
+                    });
+                    verifyTest(context);
                   });
-                  resultTest = currentValue;
-                });
-              });
-            },
-            listTest[currentTest],
+                },
+                listTest[currentTest],
+              ),
+
+              const SizedBox(
+                height: 12,
+              ),
+              //Text("Resultado: ${resultTest}"),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     //showAboutDialog(context: context,);
+              //     verifyTest(context);
+              //   },
+              //   child: const Text("Resultado do Teste"),
+              // )
+            ],
           ),
-          const SizedBox(
-            height: 12,
-          ),
-          //Text("Resultado: ${resultTest}"),
-          ElevatedButton(
-            onPressed: () {
-              //showAboutDialog(context: context,);
-      
-              if (currentTest == 20) {
-                if (resultTest < 13) {
-                  indexMsg = 0;
-                } else if (resultTest > 13 && resultTest <= 19) {
-                  indexMsg = 1;
-                } else if (resultTest > 19 && resultTest <= 28) {
-                  indexMsg = 2;
-                } else {
-                  indexMsg = 3;
-                }
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          backgroundColor: indexMsg == 0
-                              ? Colors.greenAccent
-                              : indexMsg == 1
-                                  ? Colors.greenAccent
-                                  : indexMsg == 2
-                                      ? Colors.amber
-                                      : Colors.red,
-                          content: Text(msgResult[indexMsg]),
-                          actions: [
-                            TextButton(
-                              child: const Text("Ok"),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            )
-                          ],
-                        ));
-              } else {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          content:
-                              const Text("Termine o teste para ver o resultado"),
-                          actions: [
-                            TextButton(
-                              child: const Text("Ok"),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            )
-                          ],
-                        ));
-              }
-            },
-            child: const Text("Resultado do Teste"),
-          )
-        ],
-      ),
+        ),
+      ],
     );
+  }
+
+  void verifyTest(BuildContext context) {
+    if (currentTest == 20) {
+      if (resultTest < 13) {
+        indexMsg = 0;
+      } else if (resultTest > 13 && resultTest <= 19) {
+        indexMsg = 1;
+      } else if (resultTest > 19 && resultTest <= 28) {
+        indexMsg = 2;
+      } else {
+        indexMsg = 3;
+      }
+      Future.delayed(const Duration(milliseconds: 3000), () {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  backgroundColor: indexMsg == 0
+                      ? Colors.greenAccent
+                      : indexMsg == 1
+                          ? Colors.greenAccent
+                          : indexMsg == 2
+                              ? Colors.amber
+                              : Colors.red,
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Resultado:",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        msgResult[indexMsg],
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                  actions: [
+                    TextButton(
+                      child: const Text("Ok"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    )
+                  ],
+                ));
+      });
+    } else {
+      // showDialog(
+      //     context: context,
+      //     builder: (context) => AlertDialog(
+      //           content: const Text("Termine o teste para ver o resultado"),
+      //           actions: [
+      //             TextButton(
+      //               child: const Text("Ok"),
+      //               onPressed: () {
+      //                 Navigator.pop(context);
+      //               },
+      //             )
+      //           ],
+      //         ));
+    }
+    print("Current Test:");
+    print(currentTest);
+    print("Result Test:");
+    print(resultTest);
   }
 }

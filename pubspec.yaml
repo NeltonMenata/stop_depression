@@ -39,6 +39,9 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   url_launcher: any
   just_audio: ^0.9.42
+  flutter_animate: ^4.5.2
+  fl_chart: 0.66.0
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
@@ -68,9 +71,8 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
-    - assets/icon/icon.png
-    - assets/video.gif
-    - assets/video_main.gif
+    - assets/icon/
+    - assets/videos/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

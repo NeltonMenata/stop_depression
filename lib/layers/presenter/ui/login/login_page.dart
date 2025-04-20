@@ -68,21 +68,19 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
-                      
                       decoration: BoxDecoration(
-                        color: Colors.blue,
-                        gradient: LinearGradient(colors: [
-                          const Color.fromARGB(255, 33, 233, 243),
-                          Color.fromARGB(255, 23, 101, 164),
-                        ]),
-                        borderRadius: BorderRadius.circular(20)
-                      ),
+                          color: Colors.blue,
+                          gradient: LinearGradient(colors: [
+                            const Color.fromARGB(255, 33, 233, 243),
+                            Color.fromARGB(255, 23, 101, 164),
+                          ]),
+                          borderRadius: BorderRadius.circular(20)),
                       child: Column(
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: Text(
-                              "Inicie sua Sessão no Stop Depression",
+                              "Inicie sessão na sua conta",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.white,
@@ -95,26 +93,40 @@ class _LoginPageState extends State<LoginPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Usuário",
-                                  style: TextStyle(
-                                      color: Colors.blue.shade900,
-                                      fontSize: fontSizeTitleLabel,
-                                      fontWeight: FontWeight.w900),
-                                ),
-                                TextField(
-                                  controller: username,
-                                  keyboardType: TextInputType.emailAddress,
-                                  style: const TextStyle(color: Colors.white),
-                                  decoration: const InputDecoration(
-                                    hintStyle: TextStyle(color: Colors.white),
-                                    disabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide()),
-                                    border: OutlineInputBorder(),
-                                    hintText: "Email",
-                                    suffixIcon: Icon(
-                                      Icons.person_outlined,
-                                      color: Colors.white,
+                                // Text(
+                                //   "Usuário",
+                                //   style: TextStyle(
+                                //       color: Colors.blue.shade900,
+                                //       fontSize: fontSizeTitleLabel,
+                                //       fontWeight: FontWeight.w900),
+                                // ),
+                                Container(
+                                  padding: const EdgeInsets.all(3.0),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(),
+                                      borderRadius: BorderRadius.circular(50)),
+                                  child: Container(
+                                    padding: const EdgeInsets.only(left: 6.0),
+                                    decoration: BoxDecoration(
+                                      color: greenDark,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: TextField(
+                                      controller: username,
+                                      textAlign: TextAlign.center,
+                                      keyboardType: TextInputType.emailAddress,
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      decoration: const InputDecoration(
+                                        hintStyle:
+                                            TextStyle(color: greenUltraLight),
+                                        border: InputBorder.none,
+                                        hintText: "Digite o seu e-mail",
+                                        suffixIcon: Icon(
+                                          Icons.person_outlined,
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -123,38 +135,58 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                                right: 12.0, left: 12.0, ),
+                              right: 12.0,
+                              left: 12.0,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Senha",
-                                  style: TextStyle(
-                                      color: Colors.blue.shade900,
-                                      fontSize: fontSizeTitleLabel,
-                                      fontWeight: FontWeight.w900),
-                                ),
-                                TextField(
-                                  controller: password,
-                                  obscureText: hiddenPassword,
-                                  style: const TextStyle(color: Colors.white),
-                                  decoration: InputDecoration(
-                                    hintStyle:
-                                        const TextStyle(color: Colors.white),
-                                    border: const OutlineInputBorder(),
-                                    hintText: "Palavra-passe",
-                                    suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            hiddenPassword = !hiddenPassword;
-                                          });
-                                        },
-                                        icon: const Icon(
-                                          Icons.remove_red_eye_outlined,
-                                          color: Colors.white,
-                                        )),
+                                // Text(
+                                //   "Insira a sua senha",
+                                //   style: TextStyle(
+                                //       color: Colors.blue.shade900,
+                                //       fontSize: fontSizeTitleLabel,
+                                //       fontWeight: FontWeight.w900),
+                                // ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    borderRadius: BorderRadius.circular(50),
                                   ),
-                                  onSubmitted: (value) {},
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: Container(
+                                    padding: const EdgeInsets.only(left: 6.0),
+                                    decoration: BoxDecoration(
+                                      color: greenDark,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: TextField(
+                                      controller: password,
+                                      textAlign: TextAlign.center,
+                                      obscureText: hiddenPassword,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                      decoration: InputDecoration(
+                                        hintStyle: const TextStyle(
+                                            color: greenUltraLight),
+                                        border: InputBorder.none,
+                                        hintText: "Insira a sua senha",
+                                        suffixIcon: IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                hiddenPassword =
+                                                    !hiddenPassword;
+                                              });
+                                            },
+                                            icon: const Icon(
+                                              Icons.remove_red_eye_outlined,
+                                              color: Colors.white,
+                                            )),
+                                      ),
+                                      onSubmitted: (value) {},
+                                    ),
+                                  ),
                                 ),
                                 Align(
                                   alignment: Alignment.centerRight,
@@ -170,16 +202,21 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                                 left: 10, right: 10, bottom: 6),
+                                left: 10, right: 10, bottom: 6),
                             child: isLogin
                                 ? const Center(
                                     child: CircularProgressIndicator(),
                                   )
                                 : ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.blue.shade900)),
                                     child: Text(
-                                      "Entrar no Sistema",
-                                      style:
-                                          TextStyle(fontSize: fontSizeTitleLabel),
+                                      "Entrar",
+                                      style: TextStyle(
+                                          fontSize: fontSizeTitleLabel,
+                                          color: Colors.white),
                                     ),
                                     onPressed: () async {
                                       if (username.text.isEmpty ||
@@ -192,9 +229,10 @@ class _LoginPageState extends State<LoginPage> {
                                       setState(() {
                                         isLogin = true;
                                       });
-                    
-                                      await Future.delayed(Duration(seconds: 3));
-                    
+
+                                      await Future.delayed(
+                                          Duration(seconds: 3));
+
                                       setState(() {
                                         isLogin = false;
                                       });
@@ -202,7 +240,18 @@ class _LoginPageState extends State<LoginPage> {
                                     },
                                   ),
                           ),
-                          SizedBox(height: 20,)
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8.0),
+                              child: TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    "Criar conta",
+                                    style: TextStyle(color: Colors.white),
+                                  )),
+                            ),
+                          )
                         ],
                       ),
                     ),
