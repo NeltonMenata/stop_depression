@@ -16,7 +16,7 @@ class _StatistcsViewState extends State<StatistcsView> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Estatisticas"),
+        //Text("Estatisticas"),
         SizedBox(
             width: 300,
             height: 500,

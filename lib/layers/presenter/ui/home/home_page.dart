@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int index = 0;
   List<String> titles = [
     'Inicio',
-    'Estatiscas',
+    'Estatísticas',
     'Perfil',
     'Psicólogo',
   ];

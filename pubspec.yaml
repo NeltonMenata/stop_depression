@@ -73,6 +73,11 @@ flutter:
     - assets/images/
     - assets/icon/
     - assets/videos/
+  
+fonts:
+  - family: Meridian
+    fonts: 
+      - assets: assets/fonts/Meridian.ttf
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
