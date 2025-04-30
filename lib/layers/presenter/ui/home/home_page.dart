@@ -1,5 +1,6 @@
 import 'package:stop_depression/layers/presenter/routes/Routes.dart';
 import 'package:stop_depression/layers/presenter/ui/doctor/doctor_view.dart';
+import 'package:stop_depression/layers/presenter/ui/home/drawer.dart';
 import 'package:stop_depression/layers/presenter/ui/statistcs/statistcs_view.dart';
 import 'package:stop_depression/layers/presenter/ui/user/user_view.dart';
 import 'package:stop_depression/layers/presenter/utils/utils.dart';
@@ -80,98 +81,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         return false;
       },
       child: Scaffold(
-        drawer: Drawer(
-          backgroundColor: Colors.blue.shade300,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Column(
-              children: [
-                UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(color: Colors.blue.shade600),
-                  accountName: const Text(
-                    "Usuario",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  accountEmail: const Text("Atividade"),
-                  currentAccountPicture: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(Utils.assetLogo)),
-                ),
-                ListTile(
-                  title: Text(
-                    "Perfil",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: width * .04,
-                    ),
-                  ),
-                  trailing: Icon(
-                    Icons.person,
-                    size: width * .08,
-                  ),
-                  onTap: () {
-                    //Navigator.of(context).pushNamed(Routes.CREATE_WORKER);
-                  },
-                ),
-                ListTile(
-                  title: Text(
-                    "Descobrir",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: width * .04,
-                    ),
-                  ),
-                  trailing: Icon(
-                    Icons.search,
-                    size: width * .08,
-                  ),
-                  onTap: () {
-                    // Navigator.of(context).pushNamed(Routes.VIEW_MANAGER);
-                  },
-                ),
-                ListTile(
-                  title: Text(
-                    "Ajustes",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: width * .04,
-                    ),
-                  ),
-                  trailing: Icon(
-                    Icons.settings,
-                    size: width * .08,
-                  ),
-                  onTap: () {
-                    // Navigator.of(context).pushNamed(Routes.VIEW_MANAGER);
-                  },
-                ),
-                const Spacer(),
-                ListTile(
-                  title: Text(
-                    "Terminar Sessão",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue.shade900,
-                      fontSize: width * .04,
-                    ),
-                  ),
-                  trailing: Icon(
-                    Icons.logout_outlined,
-                    color: Colors.blue.shade900,
-                    size: width * .08,
-                  ),
-                  onTap: () async {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, Routes.LOGIN, (route) => false);
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Terminando a sessão. Aguarde!"),
-                    ));
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
+        drawer: DrawerMain(),
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Color.fromARGB(255, 15, 152, 187),
@@ -238,7 +148,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 decoration: BoxDecoration(
                                     image: const DecorationImage(
                                       fit: BoxFit.fill,
-                                      opacity: .8,
+                                      //opacity: .9,
                                       image:
                                           AssetImage("assets/images/quiz1.jpg"),
                                     ),
@@ -248,14 +158,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                    const Padding(
+                                      padding: EdgeInsets.all(8.0),
                                       child: Text(
                                         "QUIZ",
                                         style: TextStyle(
+                                          //fontFamily: "Meridian",
                                           fontSize: 34,
                                           fontWeight: FontWeight.w900,
-                                          color: Colors.brown.shade900,
+                                          color: Colors.white,
                                         ),
                                       ),
                                     ),
@@ -287,8 +198,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     context, Routes.TEST_DESC_1);
                               },
                               child: Container(
+                                
                                 decoration: BoxDecoration(
+                                  
                                     image: const DecorationImage(
+                                      //opacity: .9,
                                       fit: BoxFit.fill,
                                       image: AssetImage(
                                           "assets/images/teste1.jpg"),
@@ -319,7 +233,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       child: const Padding(
                                         padding: EdgeInsets.all(8.0),
                                         child: Text(
-                                          "Aprenda de forma divertida e interativa sobre a depressão. Saiba quais são as suas causas e cuidados a ter para não cair nela.",
+                                          "Descubra mais sobre seu bem-estar emocional! Faça o teste agora e entenda melhor seus sentimentos. Seu autocuidado começa aqui!",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(color: Colors.white),
                                         ),
@@ -369,7 +283,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       child: const Padding(
                                         padding: EdgeInsets.all(8.0),
                                         child: Text(
-                                          "Aprenda de forma divertida e interativa sobre a depressão. Saiba quais são as suas causas e cuidados a ter para não cair nela.",
+                                          "Cuidar da sua saúde mental é essencial. Nossas terapias oferecem apoio profissional e acolhimento. Dê o primeiro passo para seu bem-estar!",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(color: Colors.white),
                                         ),
@@ -421,7 +335,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               // ),
             ),
             StatistcsView(),
-            const UserView(),
+            PerfilPage(),
             const DoctorView()
           ],
         ),

@@ -10,97 +10,121 @@ class StatistcsView extends StatefulWidget {
 }
 
 class _StatistcsViewState extends State<StatistcsView> {
+  // Mapa representando as terapias feitas de segunda a sábado
+  Map<String, bool> tarefasDaSemana = {
+    'Seg': true,
+    'Ter': true,
+    'Qua': false,
+    'Qui': true,
+    'Sex': false,
+    'Sab': false,
+  };
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        //Text("Estatisticas"),
-        SizedBox(
-            width: 300,
-            height: 500,
-            child: Column(
-              children: [
-                Text(
-                  'O meu relatório',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    // Conta quantas tarefas foram feitas
+    int terapiasRealizadas = tarefasDaSemana.values.where((feito) => feito).length;
+
+    // Define mensagem e cor com base nas terapias realizadas
+    String mensagemFinal = '';
+    Color corMensagem = Colors.green;
+
+    if (terapiasRealizadas <= 2) {
+      mensagemFinal = 'Não foi nada bem, mas eu sei que ainda pode melhorar e ter um bom progresso na próxima semana.';
+      corMensagem = Colors.orange;
+    } else if (terapiasRealizadas <= 4) {
+      mensagemFinal = 'Você não foi tão bem, mas eu sei que na próxima semana podes melhorar com um pouco mais de dedicação.';
+      corMensagem = Colors.yellow[800]!;
+    } else {
+      mensagemFinal = 'Você foi muito bem, estou gostando da sua dedicação, continue assim.';
+      corMensagem = Colors.green;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          Text(
+            'O meu relatório',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 16),
+          AspectRatio(
+            aspectRatio: 1,
+            child: LineChart(
+              LineChartData(
+                gridData: FlGridData(
+                  show: true,
+                  drawVerticalLine: false,
+                  getDrawingHorizontalLine: (value) => FlLine(
+                    color: Colors.grey.withOpacity(0.3),
+                    strokeWidth: 1,
+                  ),
                 ),
-                SizedBox(height: 16),
-                Expanded(
-                  child: LineChart(
-                    LineChartData(
-                      gridData: FlGridData(show: false),
-                      titlesData: FlTitlesData(
-                        leftTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            getTitlesWidget: (value, meta) {
-                            print(meta.formattedValue);
-                            return Column(
-                              children: [Text("A")],
-                            );
-                          },)
-                        ),
-                        topTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: false,
-                          ),
-                        ),
-                        rightTitles: AxisTitles(
-                          sideTitles: SideTitles(showTitles: false)
-                        )
-                      ),
-                      borderData: FlBorderData(show: false),
-                      minX: 0,
-                      maxX: 6,
-                      minY: 0,
-                      maxY: 4,
-                      lineBarsData: [
-                        LineChartBarData(
-                          spots: [
-                            FlSpot(0, 0),
-                            FlSpot(1, 2),
-                            FlSpot(2, 4),
-                            FlSpot(3, 1),
-                            FlSpot(4, 3),
-                          ],
-                          color: Colors.amber,
-                          isCurved: true,
-                          // colors: [
-                          //   Colors.red,
-                          //   Colors.orange,
-                          //   Colors.yellow,
-                          //   Colors.green
-                          // ],
-                          barWidth: 4,
-                          isStrokeCapRound: true,
-                          belowBarData: BarAreaData(show: false),
-                        ),
-                      ],
+                titlesData: FlTitlesData(
+                  leftTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: (value, meta) {
+                        final dias = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+                        if (value >= 0 && value < dias.length) {
+                          return Text(dias[value.toInt()]);
+                        }
+                        return const SizedBox.shrink();
+                      },
+                      reservedSize: 40,
+                      interval: 1,
                     ),
                   ),
-                ),
-                SizedBox(height: 16),
-                Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(8),
+                  bottomTitles: AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
                   ),
-                  child: Text(
-                    'Você foi muito bem. Estou gostando da sua dedicação. Continue assim.',
-                    style: TextStyle(color: Colors.white),
+                  topTitles: AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
+                  ),
+                  rightTitles: AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
                   ),
                 ),
-                SizedBox(height: 16),
-                Text(
-                  'Sáb, 22/03/24',
-                  style: TextStyle(fontSize: 14, color: Colors.grey),
-                )
-              ],
-            )),
-      ],
+                borderData: FlBorderData(show: false),
+                minX: 0,
+                maxX: 1,
+                minY: 0,
+                maxY: 6,
+                lineBarsData: [
+                  LineChartBarData(
+                    spots: [
+                      FlSpot(0.5, terapiasRealizadas.toDouble()),
+                    ],
+                    isCurved: false,
+                    barWidth: 2,
+                    color: Colors.blue,
+                    dotData: FlDotData(show: true),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 24),
+          Container(
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: corMensagem,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              mensagemFinal,
+              style: TextStyle(color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          SizedBox(height: 16),
+          Text(
+            DateTime.now().toString().substring(0, 11),
+            style: TextStyle(fontSize: 14, color: Colors.grey),
+          ),
+        ],
+      ),
     );
   }
 }

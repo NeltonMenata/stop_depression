@@ -54,12 +54,13 @@ class _LoginPageState extends State<LoginPage> {
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Center(
-                              child: Image.asset(
-                            "assets/images/logo.png",
-                            height: width * 0.3,
-                            width: width * 0.3,
-                            fit: BoxFit.cover,
-                          )),
+                            child: Image.asset(
+                              "assets/images/logo.png",
+                              height: width * 0.3,
+                              width: width * 0.3,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                         SizedBox(height: height * 0.03),
                       ],
@@ -243,7 +244,8 @@ class _LoginPageState extends State<LoginPage> {
                           Align(
                             alignment: Alignment.centerRight,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8.0),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 8.0),
                               child: TextButton(
                                   onPressed: () {},
                                   child: Text(

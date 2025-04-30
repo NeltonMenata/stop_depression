@@ -55,7 +55,7 @@ class _TherapyPageState extends State<TherapyPage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context,Routes.REGISTER_MOOD);
+                      Navigator.pushNamed(context, Routes.REGISTER_MOOD);
                     },
                     child: Container(
                       width: width * multiWidth,
@@ -64,17 +64,66 @@ class _TherapyPageState extends State<TherapyPage> {
                         borderRadius: BorderRadius.circular(15),
                         image: const DecorationImage(
                             fit: BoxFit.fill,
-                            image: AssetImage('assets/images/respiracao.jpg'),
+                            image: AssetImage('assets/images/humor.jpg'),
                             opacity: .8),
                       ),
                       child: Center(
-                        child: Text(
-                          'Registo de Humor',
-                          style: TextStyle(
-                              fontSize: width * .06,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                          textAlign: TextAlign.center,
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(.7),
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Colors.black,
+                            ),
+                          ),
+                          child: Text(
+                            'Registo de Humor',
+                            style: TextStyle(
+                                fontSize: width * .047,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.DESAFIO);
+                    },
+                    child: Container(
+                      width: width * multiWidth,
+                      height: width * multiHeight,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: const DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage('assets/images/desafio.jpeg'),
+                            opacity: .8),
+                      ),
+                      child: Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(.7),
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Colors.black,
+                            ),
+                          ),
+                          child: Text(
+                            'Desafios do Bem',
+                            style: TextStyle(
+                                fontSize: width * .047,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ),
@@ -83,7 +132,9 @@ class _TherapyPageState extends State<TherapyPage> {
                     height: 12,
                   ),
                   // TextButton(
-                  //   onPressed: abrirAppRespiracao,
+                  //   onPressed: () {
+                  //     Navigator.pushNamed(context, Routes.REGISTER_MOOD);
+                  //   },
                   //   child: Container(
                   //     width: width * multiWidth,
                   //     height: width * multiHeight,
@@ -91,183 +142,33 @@ class _TherapyPageState extends State<TherapyPage> {
                   //       borderRadius: BorderRadius.circular(15),
                   //       image: const DecorationImage(
                   //           fit: BoxFit.fill,
-                  //           image: AssetImage('assets/images/respiracao.jpg'),
+                  //           image: AssetImage('assets/images/planejar.jpg'),
                   //           opacity: .8),
                   //     ),
                   //     child: Center(
-                  //       child: Text(
-                  //         'Exercicios de Respiracao',
-                  //         style: TextStyle(
-                  //             fontSize: width * .06,
-                  //             color: Colors.white,
-                  //             fontWeight: FontWeight.w700),
-                  //         textAlign: TextAlign.center,
+                  //       child: Container(
+                  //         padding: const EdgeInsets.all(4),
+                  //         decoration: BoxDecoration(
+                  //           color: Colors.black.withOpacity(.7),
+                  //           borderRadius: BorderRadius.circular(15),
+                  //           border: Border.all(
+                  //             color: Colors.black,
+                  //           ),
+                  //         ),
+                  //         child: Text(
+                  //           'Planejar o dia',
+                  //           style: TextStyle(
+                  //               fontSize: width * .047,
+                  //               color: Colors.white,
+                  //               fontWeight: FontWeight.w700),
+                  //           textAlign: TextAlign.center,
+                  //         ),
                   //       ),
                   //     ),
                   //   ),
                   // ),
-                  // const SizedBox(
-                  //   height: 12,
-                  // ),
-                  TextButton(
-                    onPressed: abrirBiblia,
-                    child: Container(
-                      width: width * multiWidth,
-                      height: width * multiHeight,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/images/biblia.jpg'),
-                            opacity: .8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Biblia',
-                          style: TextStyle(
-                              fontSize: width * .06,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
                   const SizedBox(
                     height: 12,
-                  ),
-                  TextButton(
-                    onPressed: abrirMusicasRelaxantes,
-                    child: Container(
-                      width: width * multiWidth,
-                      height: width * multiHeight,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/images/musica.jpg'),
-                            opacity: .8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Musico-terapia',
-                          style: TextStyle(
-                              fontSize: width * .06,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextButton(
-                    onPressed: abrirVideosAlimentacaoSaudavel,
-                    child: Container(
-                      width: width * multiWidth,
-                      height: width * multiHeight,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/images/alimentacao.jpg'),
-                            opacity: .8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Alimentação Saudável',
-                          style: TextStyle(
-                              fontSize: width * .06,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextButton(
-                    onPressed: abrirTecnicasRelaxamento,
-                    child: Container(
-                      width: width * multiWidth,
-                      height: width * multiHeight,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/images/relaxamento.jpg'),
-                            opacity: .8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Tecnicas de Relaxamento',
-                          style: TextStyle(
-                              fontSize: width * .06,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextButton(
-                    onPressed: abrirVideosExercicios,
-                    child: Container(
-                      width: width * multiWidth,
-                      height: width * multiHeight,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(
-                                'assets/images/exercicio-fisico.jpg'),
-                            opacity: .8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Exercícios Físicos',
-                          style: TextStyle(
-                              fontSize: width * .06,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextButton(
-                    onPressed: abrirDiarioOnline,
-                    child: Container(
-                      width: width * multiWidth,
-                      height: width * multiHeight,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/images/diario.webp'),
-                            opacity: .8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Diário Online',
-                          style: TextStyle(
-                              fontSize: width * .06,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
                   ),
                 ]),
           ),

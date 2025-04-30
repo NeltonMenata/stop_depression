@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 import 'package:stop_depression/layers/presenter/routes/Routes.dart';
+import 'package:stop_depression/layers/presenter/ui/ajustes/ajuste.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService().init(); // Inicializa notificações
   Animate.restartOnHotReload = true;
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => AppSettings(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -12,12 +21,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settings = Provider.of<AppSettings>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: Routes.routes(context),
       initialRoute: Routes.SPLASH,
+      darkTheme: ThemeData.dark(),
+      themeMode: settings.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       theme: ThemeData(
-        colorScheme: ColorScheme.light(
+        //textTheme:
+          //  const TextTheme(bodyText1: TextStyle(fontFamily: "Meridian")),
+        colorScheme: const ColorScheme.light(
             primary: Color.fromARGB(255, 13, 151, 161),
             brightness: Brightness.light,
             secondary: Color.fromARGB(255, 14, 113, 118)),

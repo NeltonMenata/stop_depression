@@ -42,6 +42,10 @@ dependencies:
   flutter_animate: ^4.5.2
   fl_chart: 0.66.0
   intl: ^0.19.0
+  shared_preferences: ^2.2.3
+  provider: ^6.1.4
+  flutter_local_notifications: ^18.0.1
+  image_picker: ^1.0.8
 
 dev_dependencies:
   flutter_test:
@@ -74,10 +78,10 @@ flutter:
     - assets/icon/
     - assets/videos/
   
-fonts:
-  - family: Meridian
-    fonts: 
-      - assets: assets/fonts/Meridian.ttf
+  fonts:
+    - family: Meridian
+      fonts: 
+        - asset: assets/fonts/Meridian.ttf
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
