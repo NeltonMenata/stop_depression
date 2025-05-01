@@ -63,7 +63,7 @@ class _RegisterMoodState extends State<RegisterMood> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Registo de Humor"),
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromARGB(255, 15, 152, 187),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),

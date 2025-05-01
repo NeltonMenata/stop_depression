@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'package:parse_server_sdk/parse_server_sdk.dart';
+
 class PerfilPage extends StatefulWidget {
   @override
   _PerfilPageState createState() => _PerfilPageState();
@@ -9,16 +11,17 @@ class PerfilPage extends StatefulWidget {
 
 class _PerfilPageState extends State<PerfilPage> {
   File? _avatarImage;
+  ImageProvider? image;
 
-  final TextEditingController _nomeController = TextEditingController();
-  final TextEditingController _idadeController = TextEditingController();
-  final TextEditingController _cidadeController = TextEditingController();
+  final TextEditingController nomeController = TextEditingController();
+  final TextEditingController idadeController = TextEditingController();
+  final TextEditingController cidadeController = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
 
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    
+
     if (pickedFile != null) {
       setState(() {
         _avatarImage = File(pickedFile.path);
@@ -33,17 +36,34 @@ class _PerfilPageState extends State<PerfilPage> {
   }
 
   @override
+  void initState() {
+    getUser();
+    super.initState();
+  }
+
+  Future<void> getUser() async {
+final user = await ParseUser.currentUser() as ParseUser;
+    nomeController.text = user.get("name") ?? "";
+    final age = user.get("age") ?? "";
+    idadeController.text = age.toString();
+    cidadeController.text = user.get("city") ?? "";
+    final avatarImage = user.get("avatarImage") as ParseFileBase?;
+    if(avatarImage != null){
+      image = NetworkImage(avatarImage.url!); 
+    }
+  }
+
+  @override
   void dispose() {
-    _nomeController.dispose();
-    _idadeController.dispose();
-    _cidadeController.dispose();
+    nomeController.dispose();
+    idadeController.dispose();
+    cidadeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: ListView(
@@ -54,8 +74,8 @@ class _PerfilPageState extends State<PerfilPage> {
                   CircleAvatar(
                     radius: 60,
                     backgroundImage:
-                        _avatarImage != null ? FileImage(_avatarImage!) : null,
-                    child: _avatarImage == null
+                        _avatarImage != null ? FileImage(_avatarImage!) : image,
+                    child: _avatarImage == null && image == null
                         ? const Icon(
                             Icons.person,
                             size: 60,
@@ -91,7 +111,7 @@ class _PerfilPageState extends State<PerfilPage> {
             ),
             const SizedBox(height: 30),
             TextField(
-              controller: _nomeController,
+              controller: nomeController,
               decoration: const InputDecoration(
                 labelText: 'Nome',
                 border: OutlineInputBorder(),
@@ -99,7 +119,7 @@ class _PerfilPageState extends State<PerfilPage> {
             ),
             const SizedBox(height: 20),
             TextField(
-              controller: _idadeController,
+              controller: idadeController,
               decoration: const InputDecoration(
                 labelText: 'Idade',
                 border: OutlineInputBorder(),
@@ -108,7 +128,7 @@ class _PerfilPageState extends State<PerfilPage> {
             ),
             const SizedBox(height: 20),
             TextField(
-              controller: _cidadeController,
+              controller: cidadeController,
               decoration: const InputDecoration(
                 labelText: 'Cidade',
                 border: OutlineInputBorder(),
@@ -118,6 +138,21 @@ class _PerfilPageState extends State<PerfilPage> {
             ElevatedButton(
               onPressed: () async {
                 // Aqui você pode salvar os dados, enviar para servidor etc.
+                final user = await ParseUser.currentUser() as ParseUser;
+                print(user.username);
+                user
+                  ..set("name", nomeController.text)
+                  ..set("age", int.parse(idadeController.text))
+                  ..set("city", cidadeController.text);
+
+                  if(_avatarImage != null){
+                    final photo = ParseFile(_avatarImage);
+                    await photo.save();
+                    user.set("avatarImage", photo);
+                  }
+
+                  await user.save();
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Informações salvas!')),
                 );
@@ -130,4 +165,3 @@ class _PerfilPageState extends State<PerfilPage> {
     );
   }
 }
-

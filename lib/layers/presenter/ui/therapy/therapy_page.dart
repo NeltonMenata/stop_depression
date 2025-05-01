@@ -19,9 +19,9 @@ class _TherapyPageState extends State<TherapyPage> {
     const multiWidth = .85;
 
     return Scaffold(
-      backgroundColor: Colors.indigo.shade300,
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 15, 152, 187),
         title: const Text(
           'Terapia',
           style: TextStyle(
@@ -131,42 +131,42 @@ class _TherapyPageState extends State<TherapyPage> {
                   const SizedBox(
                     height: 12,
                   ),
-                  // TextButton(
-                  //   onPressed: () {
-                  //     Navigator.pushNamed(context, Routes.REGISTER_MOOD);
-                  //   },
-                  //   child: Container(
-                  //     width: width * multiWidth,
-                  //     height: width * multiHeight,
-                  //     decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(15),
-                  //       image: const DecorationImage(
-                  //           fit: BoxFit.fill,
-                  //           image: AssetImage('assets/images/planejar.jpg'),
-                  //           opacity: .8),
-                  //     ),
-                  //     child: Center(
-                  //       child: Container(
-                  //         padding: const EdgeInsets.all(4),
-                  //         decoration: BoxDecoration(
-                  //           color: Colors.black.withOpacity(.7),
-                  //           borderRadius: BorderRadius.circular(15),
-                  //           border: Border.all(
-                  //             color: Colors.black,
-                  //           ),
-                  //         ),
-                  //         child: Text(
-                  //           'Planejar o dia',
-                  //           style: TextStyle(
-                  //               fontSize: width * .047,
-                  //               color: Colors.white,
-                  //               fontWeight: FontWeight.w700),
-                  //           textAlign: TextAlign.center,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.AGENDA);
+                    },
+                    child: Container(
+                      width: width * multiWidth,
+                      height: width * multiHeight,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: const DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage('assets/images/planejar.jpg'),
+                            opacity: .8),
+                      ),
+                      child: Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(.7),
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Colors.black,
+                            ),
+                          ),
+                          child: Text(
+                            'Planejar o dia',
+                            style: TextStyle(
+                                fontSize: width * .047,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   const SizedBox(
                     height: 12,
                   ),

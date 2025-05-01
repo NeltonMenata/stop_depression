@@ -334,9 +334,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               //   ],
               // ),
             ),
-            StatistcsView(),
+            const StatistcsView(),
             PerfilPage(),
-            const DoctorView()
+            PsychologistProfilePage()//DoctorView()
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

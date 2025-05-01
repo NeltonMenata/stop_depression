@@ -66,7 +66,7 @@ class _StatistcsViewState extends State<StatistcsView> {
                     sideTitles: SideTitles(
                       showTitles: true,
                       getTitlesWidget: (value, meta) {
-                        final dias = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+                        final dias = ['🙁', 'Ter', 'Qua', 'Qui', 'Sex', '😳'];
                         if (value >= 0 && value < dias.length) {
                           return Text(dias[value.toInt()]);
                         }

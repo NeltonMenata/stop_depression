@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:stop_depression/layers/presenter/routes/Routes.dart';
+//import 'package:stop_depression/layers/presenter/routes/Routes.dart';
 import 'package:stop_depression/layers/presenter/ui/login/login_controller.dart';
 import 'package:stop_depression/layers/presenter/utils/utils.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class CriarContaPage extends StatefulWidget {
+  const CriarContaPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<CriarContaPage> createState() => _CriarContaPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _CriarContaPageState extends State<CriarContaPage> {
   //final controller = getIt<LoginController>();
   bool isLogin = false;
 
@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: Text(
-                              "Inicie sessão na sua conta",
+                              "Crie a sua conta",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.white,
@@ -215,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                                             MaterialStateProperty.all(
                                                 Colors.blue.shade900)),
                                     child: Text(
-                                      "Entrar",
+                                      "Criar conta",
                                       style: TextStyle(
                                           fontSize: fontSizeTitleLabel,
                                           color: Colors.white),
@@ -224,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
                                       setState(() {
                                         isLogin = true;
                                       });
-                                      await LoginController.logar(context, username.text, password.text);
+                                      await LoginController.criarConta(context, username.text, password.text);
                                       setState(() {
                                         isLogin = false;
                                       });
@@ -239,10 +239,10 @@ class _LoginPageState extends State<LoginPage> {
                                   vertical: 20.0, horizontal: 8.0),
                               child: TextButton(
                                   onPressed: () {
-                                    Navigator.pushNamed(context, Routes.CRIAR);
+                                    Navigator.pop(context);
                                   },
                                   child: Text(
-                                    "Criar conta",
+                                    "Fazer login",
                                     style: TextStyle(color: Colors.white),
                                   )),
                             ),

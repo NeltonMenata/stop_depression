@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:stop_depression/layers/presenter/routes/Routes.dart';
 import 'package:stop_depression/layers/presenter/utils/utils.dart';
 
@@ -80,10 +81,12 @@ class _DrawerMainState extends State<DrawerMain> {
                     size: width * .08,
                   ),
                   onTap: () async {
+                    final user = await ParseUser.currentUser() as ParseUser;
+                    await user.logout();
                     Navigator.pushNamedAndRemoveUntil(
                         context, Routes.LOGIN, (route) => false);
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Terminando a sessão. Aguarde!",),
+                      content: Text("Sessão terminada!",),
                     ));
                   },
                 ),
