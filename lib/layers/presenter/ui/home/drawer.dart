@@ -17,13 +17,13 @@ class _DrawerMainState extends State<DrawerMain> {
     final width = MediaQuery.of(context).size.width;
     //final height = MediaQuery.of(context).size.height;
     return Drawer(
-          backgroundColor: Color.fromARGB(255, 15, 152, 187),
+          backgroundColor: const Color.fromARGB(255, 15, 152, 187),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: Column(
               children: [
                 UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(color: Color.fromARGB(255, 13, 122, 149),),
+                  decoration: const BoxDecoration(color: Color.fromARGB(255, 13, 122, 149),),
                   accountName: const Text(
                     "Usuario",
                     style: TextStyle(fontWeight: FontWeight.bold),

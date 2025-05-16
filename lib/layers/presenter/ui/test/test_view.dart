@@ -148,17 +148,17 @@ class _TestViewState extends State<TestView> {
       });
     } else if (currentTest == 6) {
       setState(() {
-        progressMsg = "Está sendo um máximo o seu dinamismo 💪🏽";
+        progressMsg = "Continue";
         showProgressMsg = true;
       });
     } else if (currentTest == 10) {
       setState(() {
-        progressMsg = "Continue com essa intensidade 🤩";
+        progressMsg = "Já falta pouco 👏🏽";
         showProgressMsg = true;
       });
     } else if (currentTest == 16) {
       setState(() {
-        progressMsg = "Já falta pouco 👏🏽";
+        progressMsg = "Está quase terminando";
         showProgressMsg = true;
       });
     } else {
@@ -276,7 +276,7 @@ class _TestViewState extends State<TestView> {
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
+                      const Text(
                         "Resultado:",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -313,9 +313,5 @@ class _TestViewState extends State<TestView> {
       //           ],
       //         ));
     }
-    print("Current Test:");
-    print(currentTest);
-    print("Result Test:");
-    print(resultTest);
   }
 }

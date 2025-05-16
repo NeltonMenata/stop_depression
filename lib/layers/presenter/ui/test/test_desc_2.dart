@@ -8,23 +8,23 @@ class TestDesc2Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Teste de Becky"),
+        title: const Text("Teste de Becky"),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          Text(
+          const Text(
             "",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
+          const Padding(
+            padding: EdgeInsets.all(12.0),
             child: Text(
                 "O Teste de Becky (Inventário de Depressão de Beck - BDI) é um questionário com 21 perguntas, cada uma com quatro alternativas, representando diferentes niveis de sintomas depressivos."),
           ),
-          Center(child: Text("Passo a Passo: ", style: TextStyle(fontWeight: FontWeight.bold),)),
-          ListTile(
+          const Center(child: Text("Passo a Passo: ", style: TextStyle(fontWeight: FontWeight.bold),)),
+          const ListTile(
             title: Text(
                 "Leia atentamente as perguntas, só assim responda a cada uma das 21 questões, escolhendo a alternativa que melhor descreve como se sentiu na última semana."),
             leading: Chip(
@@ -36,7 +36,7 @@ class TestDesc2Page extends StatelessWidget {
               padding: EdgeInsets.all(2),
             ),
           ),
-          ListTile(
+          const ListTile(
             title: Text(
                 "Cada resposta tem uma pontuação de 0 a 3, indicando a gravidade dos sintomas."),
             leading: Chip(
@@ -47,7 +47,7 @@ class TestDesc2Page extends StatelessWidget {
               padding: EdgeInsets.all(2),
             ),
           ),
-          ListTile(
+          const ListTile(
             title: Text(
                 "No final, todas as respostas são somadas."),
             leading: Chip(
@@ -58,12 +58,12 @@ class TestDesc2Page extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
+          const Padding(
+            padding: EdgeInsets.all(12.0),
             child: Text("Análise do Resultado - A pontuação final indica o nível de depressão:"),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -74,8 +74,8 @@ class TestDesc2Page extends StatelessWidget {
               
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -86,8 +86,8 @@ class TestDesc2Page extends StatelessWidget {
               
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -98,8 +98,8 @@ class TestDesc2Page extends StatelessWidget {
               
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -110,8 +110,8 @@ class TestDesc2Page extends StatelessWidget {
               
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
+          const Padding(
+            padding: EdgeInsets.all(12.0),
             child: Text("Com base no resultado, um psicólogo pode sugerir acompanhamento ou tratamento adequado.\nO teste não substitui um diagnóstico clínico, mas é um indicativo inicial do estado emocional do paciente."),
           ),
           Align(
@@ -123,7 +123,7 @@ class TestDesc2Page extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, Routes.TEST);
                   },
-                  child: Text("Fazer teste",style: TextStyle(color: Colors.black),)),
+                  child: const Text("Fazer teste",style: TextStyle(color: Colors.black),)),
             ),
           )
         ]),

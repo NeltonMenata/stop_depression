@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'package:stop_depression/layers/presenter/utils/utils.dart';
 
 class RegisterMood extends StatefulWidget {
   @override
@@ -8,6 +10,7 @@ class RegisterMood extends StatefulWidget {
 class _RegisterMoodState extends State<RegisterMood> {
   int selectedMood = -1;
   String description = '';
+  int setIndex = -1;
   DateTime selectedDate = DateTime.now();
 
   final TextEditingController descriptionController = TextEditingController();
@@ -21,6 +24,7 @@ class _RegisterMoodState extends State<RegisterMood> {
   ];
 
   void selectMood(int index) {
+    setIndex = index;
     setState(() {
       selectedMood = index;
     });
@@ -31,21 +35,45 @@ class _RegisterMoodState extends State<RegisterMood> {
   //   return formatter.format(date);
   // }
 
-  void saveMood() {
-    if (selectedMood != -1) {
-      final mood = moods[selectedMood]["label"];
-      final moodEmoji = moods[selectedMood]["emoji"];
-      final moodColor = moods[selectedMood]["color"];
-      final moodDescription = descriptionController.text.trim();
-      //final moodDate = formatDate(selectedDate);
+  Future<List<ParseObject>>? getMood() async {
+    final user = await ParseUser.currentUser() as ParseUser;
+    final mood = QueryBuilder(ParseObject("Humor"));
+    mood.whereEqualTo("user", user);
+    final response = await mood.find();
+    return response;
+  }
 
-      // Aqui você pode salvar os dados no banco (Firebase, SQLite, etc.)
-      print("Humor: $mood ($moodEmoji)");
-      print("Descrição: $moodDescription");
-      //print("Data: $moodDate");
+  Future<void> saveMood(int index) async {
 
+    if(selectedMood == -1){
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Humor registrado com sucesso!")),
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("Selecione um emoji de como te sentes hoje!")),
+      );
+      return;
+    }
+
+    if(descriptionController.text.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("Escreva uma descrição de como foi o seu dia hoje!")),
+      );
+      return;
+    }
+
+    final user = await ParseUser.currentUser() as ParseUser;
+    if (selectedMood != -1) {
+      
+      final humor = ParseObject("Humor");
+      humor.set("title", moods[index]["label"]);
+      humor.set("emoji", moods[index]["emoji"]);
+      humor.set("user", user);
+      humor.set("describe", descriptionController.text);
+      await humor.save();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Humor registrado com sucesso!")),
       );
 
       // Limpar campos (opcional)
@@ -62,19 +90,22 @@ class _RegisterMoodState extends State<RegisterMood> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Registo de Humor"),
-        backgroundColor: Color.fromARGB(255, 15, 152, 187),
+        title: const Text(
+          "Registo de Humor",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: greenLight,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Text(
+              const Text(
                 "Como te sentes hoje?",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(moods.length, (index) {
@@ -104,44 +135,69 @@ class _RegisterMoodState extends State<RegisterMood> {
                   );
                 }),
               ),
-              SizedBox(height: 30),
-              Align(
+              const SizedBox(height: 30),
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Como foi o seu dia?",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 150,
-              child: TextField(
-                controller: descriptionController,
-                maxLines: 3,
-                style: TextStyle(color: Colors.grey.shade800),
-                decoration: InputDecoration(
-                  hintText: "Descrever",
-                  filled: true,
-                  
-                  fillColor: Colors.grey[200],
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              SizedBox(
+                height: 150,
+                child: TextField(
+                  controller: descriptionController,
+                  maxLines: 3,
+                  style: TextStyle(color: Colors.grey.shade800),
+                  decoration: InputDecoration(
+                    hintText: "Descrever",
+                    filled: true,
+                    fillColor: Colors.grey[200],
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
                 ),
-              ),),
-              SizedBox(height: 20),
+              ),
+              const SizedBox(height: 20),
               ElevatedButton.icon(
-                onPressed: saveMood,
-                icon: Icon(Icons.check_circle, color: Colors.white,),
-                label: Text("Salvar", style: TextStyle(color: Colors.white),),
+                onPressed: () => saveMood(setIndex),
+                icon: const Icon(
+                  Icons.check_circle,
+                  color: Colors.white,
+                ),
+                label: const Text(
+                  "Salvar",
+                  style: TextStyle(color: Colors.white),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                 ),
               ),
-              SizedBox(height: 20),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Text(
-                  DateTime.now().toIso8601String().substring(0, 10),
-                  style: TextStyle(color: Colors.grey[700], fontSize: 16),
-                ),
-              )
+              const SizedBox(height: 20),
+              
+              FutureBuilder<List<ParseObject>>(
+                  future: getMood(),
+                  builder: ((context, snapshot) {
+                    if (snapshot.hasData) {
+                      return SingleChildScrollView(
+                        child: Column(
+                          children: List.generate(
+                              snapshot.data?.length ?? 0,
+                              (index) => ListTile(
+                                leading: Text(snapshot.data?[index].get("emoji",), style: TextStyle(fontSize: 30),),
+                                    title: Text(snapshot.data?[index].get("title")),
+                                    subtitle: Text(snapshot.data?[index].get("describe")),
+                                    trailing: Text("${snapshot.data?[index].createdAt!.toIso8601String().substring(0, 10)}"),
+                                  )),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text("Houve um erro: ${snapshot.error}");
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                    
+                  }))
             ],
           ),
         ),

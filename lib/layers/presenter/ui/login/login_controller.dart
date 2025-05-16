@@ -12,13 +12,13 @@ class LoginController{
       if (result.statusCode == 200 && result.success) {
         Navigator.pushNamedAndRemoveUntil(context, Routes.HOME, (route) => false);
       } else if (result.statusCode == -1) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao logar, verifique a sua internet!')));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Erro ao logar, verifique a sua internet!')));
       } else {
         //Verifique os dados do usuario
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao logar, verifique seu email e senha!')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Erro ao logar, verifique seu email e senha!')));
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao logar, verifique seu email e senha ou a sua internet!')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Erro ao logar, verifique seu email e senha ou a sua internet!')));
       //Verifique os dados de usuario e a conexao com a internet
     }
   }
@@ -31,16 +31,16 @@ class LoginController{
       final result = await user.create();
 
       if (result.success) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Conta criada com sucesso, faça login!')));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Conta criada com sucesso, faça login!')));
         Navigator.pushNamedAndRemoveUntil(context, Routes.LOGIN, (route) => false);
       } else if (result.statusCode == -1) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao criar conta, verifique a sua internet!')));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Erro ao criar conta, verifique a sua internet!')));
       } else {
         //Verifique os dados do usuario
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao criar conta, ${result.error?.message}!')));
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao criar conta, verifique seu email e senha ou a sua internet!')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Erro ao criar conta, verifique seu email e senha ou a sua internet!')));
       //Verifique os dados de usuario e a conexao com a internet
     }
   }

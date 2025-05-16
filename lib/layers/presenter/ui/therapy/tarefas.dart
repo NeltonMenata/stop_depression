@@ -55,8 +55,8 @@ class _AgendaDiariaState extends State<AgendaDiaria> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Agenda Diária"),
-        backgroundColor: Color.fromARGB(255, 15, 152, 187),
+        title: const Text("Agenda Diária"),
+        backgroundColor: const Color.fromARGB(255, 15, 152, 187),
         //backgroundColor: Colors.indigo,
       ),
       body: Padding(
@@ -69,11 +69,11 @@ class _AgendaDiariaState extends State<AgendaDiaria> {
                 Expanded(
                   child: TextField(
                     controller: _controller,
-                    decoration: InputDecoration(labelText: "Nova tarefa"),
+                    decoration: const InputDecoration(labelText: "Nova tarefa"),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                   onPressed: () {
                     if (_controller.text.trim().isNotEmpty) {
                       adicionarTarefa(_controller.text.trim());
@@ -82,7 +82,7 @@ class _AgendaDiariaState extends State<AgendaDiaria> {
                 )
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Lista de tarefas
             Expanded(
               child: ListView.builder(
@@ -103,7 +103,7 @@ class _AgendaDiariaState extends State<AgendaDiaria> {
                       child: CircleAvatar(
                         backgroundColor:
                             tarefa['feito'] ? Colors.green : Colors.grey, // Verde se feito
-                        child: Icon(Icons.check, color: Colors.white),
+                        child: const Icon(Icons.check, color: Colors.white),
                       ),
                     ),
                   );

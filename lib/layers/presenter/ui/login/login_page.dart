@@ -72,8 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.blue,
-                          gradient: LinearGradient(colors: [
-                            const Color.fromARGB(255, 33, 233, 243),
+                          gradient: const LinearGradient(colors: [
+                            Color.fromARGB(255, 33, 233, 243),
                             Color.fromARGB(255, 23, 101, 164),
                           ]),
                           borderRadius: BorderRadius.circular(20)),
@@ -241,7 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                                   onPressed: () {
                                     Navigator.pushNamed(context, Routes.CRIAR);
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "Criar conta",
                                     style: TextStyle(color: Colors.white),
                                   )),

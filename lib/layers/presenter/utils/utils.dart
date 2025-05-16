@@ -50,13 +50,13 @@ String separator(String value) {
     for (int letter = 0; letter < value.length; letter++) {
       if (letter == 0 && value.length == 4 ||
           letter == 0 && value.length == 7) {
-        newValue = newValue + value[letter] + ".";
+        newValue = "$newValue${value[letter]}.";
       } else if (letter == 2 && value.length == 5) {
-        newValue = newValue + "." + value[letter];
+        newValue = "$newValue.${value[letter]}";
       } else if (letter == 3 && value.length == 6) {
-        newValue = newValue + "." + value[letter];
+        newValue = "$newValue.${value[letter]}";
       } else if (letter == 4 && value.length == 7) {
-        newValue = newValue + "." + value[letter];
+        newValue = "$newValue.${value[letter]}";
       } else {
         newValue = newValue + value[letter];
       }

@@ -1,9 +1,9 @@
 import 'package:stop_depression/layers/presenter/routes/Routes.dart';
 import 'package:stop_depression/layers/presenter/ui/doctor/doctor_view.dart';
 import 'package:stop_depression/layers/presenter/ui/home/drawer.dart';
+import 'package:stop_depression/layers/presenter/ui/home/page_view_item.dart';
 import 'package:stop_depression/layers/presenter/ui/statistcs/statistcs_view.dart';
 import 'package:stop_depression/layers/presenter/ui/user/user_view.dart';
-import 'package:stop_depression/layers/presenter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -19,8 +19,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   late VideoPlayerController videoPlayerController;
 
-  double viewPort = .9;
-  final pageController = PageController(viewportFraction: .7);
+  double viewPort = .7;
+  late PageController pageController;
   int currentIndex = 0;
 
   int index = 0;
@@ -40,15 +40,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     videoPlayerController =
-        VideoPlayerController.asset("assets/videos/home.mp4")..initialize().then((value) {
-          setState(() {
-            videoPlayerController.play();
-            videoPlayerController.setLooping(true);
+        VideoPlayerController.asset("assets/videos/home.mp4")
+          ..initialize().then((value) {
+            setState(() {
+              videoPlayerController.play();
+              videoPlayerController.setLooping(true);
+            });
           });
-        } 
-        
-        );
+    pageController = PageController(viewportFraction: viewPort);
     tabController = TabController(length: 4, vsync: this); // 3 abas
+    currentIndex = 0;
     super.initState();
   }
 
@@ -59,10 +60,39 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  final pageViewsContent = [
+    {
+      "title": "QUIZ",
+      "subtitle":
+          "Aprenda de forma divertida e interativa sobre a depressão. Saiba quais são as suas causas e cuidados a ter para não cair nela.",
+      "image": "assets/images/quiz1.jpg",
+      "color": const Color.fromARGB(255, 13, 107, 130),
+      "action": (BuildContext context) => {}
+    },
+    {
+      "title": "TESTE",
+      "subtitle":
+          "Descubra mais sobre seu bem-estar emocional! Faça o teste agora e entenda melhor seus sentimentos. Seu autocuidado começa aqui!",
+      "image": "assets/images/teste1.jpg",
+      "color": Colors.brown.shade900,
+      "action": (BuildContext context) =>
+          {Navigator.pushNamed(context, Routes.TEST_DESC_1)}
+    },
+    {
+      "title": "TERAPIA",
+      "subtitle":
+          "Cuidar da sua saúde mental é essencial. Nossas terapias oferecem apoio profissional e acolhimento. Dê o primeiro passo para seu bem-estar!",
+      "image": "assets/images/terapia1.jpg",
+      "color": Colors.lightGreen.shade800,
+      "action": (BuildContext context) =>
+          {Navigator.pushNamed(context, Routes.THERAPY)}
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     //final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    //final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     // const paddingLeft = 10.0;
     // final paddingTop = height * 0.03;
@@ -81,42 +111,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         return false;
       },
       child: Scaffold(
-        drawer: DrawerMain(),
+        drawer: const DrawerMain(),
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 15, 152, 187),
+          backgroundColor: const Color.fromARGB(255, 15, 152, 187),
           title: Text(
             titles[index],
             style: const TextStyle(
                 fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-
-        // body: Stack(
-        //   children: [
-        //     Image.asset(
-        //       "assets/video.gif",
-        //       width: double.infinity,
-        //       height: double.infinity,
-        //       fit: BoxFit.cover,
-        //     ),
-        //     Padding(
-        //         padding: const EdgeInsets.all(12.0),
-        //         child: Center(
-        //           child: Text("Explore, aprenda e cuide da sua saude mental"),
-        //         ))
-        //   ],
-        // ),
         body: TabBarView(
           controller: tabController,
           children: [
             Container(
               width: double.infinity,
-              decoration: const BoxDecoration(
-                  // image: DecorationImage(
-                  //     image: AssetImage("assets/images/home.jpeg"),
-                  //     fit: BoxFit.cover),
-                  ),
+              decoration: const BoxDecoration(),
               child: Stack(
                 children: [
                   SizedBox(
@@ -128,215 +138,199 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: height * .12,),
-                    child: PageView(
+                      padding: EdgeInsets.symmetric(
+                        vertical: height * .03,
+                      ),
+                      child: PageView.builder(
+                        itemCount: pageViewsContent.length,
                         controller: pageController,
                         onPageChanged: (index) {
                           setState(() {
+                            //
                             currentIndex = index;
                           });
                         },
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                //Navigator.pushNamed(context, Routes.LOGIN);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      //opacity: .9,
-                                      image:
-                                          AssetImage("assets/images/quiz1.jpg"),
-                                    ),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        "QUIZ",
-                                        style: TextStyle(
-                                          //fontFamily: "Meridian",
-                                          fontSize: 34,
-                                          fontWeight: FontWeight.w900,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: const BoxDecoration(
-                                          color:
-                                              Color.fromARGB(255, 13, 107, 130),
-                                          borderRadius: BorderRadius.vertical(
-                                              bottom: Radius.circular(20))),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Text(
-                                          "Aprenda de forma divertida e interativa sobre a depressão. Saiba quais são as suas causas e cuidados a ter para não cair nela.",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, Routes.TEST_DESC_1);
-                              },
-                              child: Container(
-                                
-                                decoration: BoxDecoration(
-                                  
-                                    image: const DecorationImage(
-                                      //opacity: .9,
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          "assets/images/teste1.jpg"),
-                                    ),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        "TESTE",
-                                        style: TextStyle(
-                                          fontSize: 34,
-                                          fontWeight: FontWeight.w900,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.brown.shade900,
-                                          borderRadius:
-                                              const BorderRadius.vertical(
-                                                  bottom: Radius.circular(20))),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Text(
-                                          "Descubra mais sobre seu bem-estar emocional! Faça o teste agora e entenda melhor seus sentimentos. Seu autocuidado começa aqui!",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, Routes.THERAPY);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          "assets/images/terapia1.jpg"),
-                                    ),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        "TERAPIA",
-                                        style: TextStyle(
-                                          fontSize: 34,
-                                          fontWeight: FontWeight.w900,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.lightGreen.shade800,
-                                          borderRadius:
-                                              const BorderRadius.vertical(
-                                                  bottom: Radius.circular(20))),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Text(
-                                          "Cuidar da sua saúde mental é essencial. Nossas terapias oferecem apoio profissional e acolhimento. Dê o primeiro passo para seu bem-estar!",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ]),
-                  ),
+                        itemBuilder: (context, index) => PageViewItem(
+                            title: pageViewsContent[index]["title"].toString(),
+                            subtitle: pageViewsContent[index]["subtitle"].toString(),
+                            image: pageViewsContent[index]["image"].toString(),
+                            color: pageViewsContent[index]["color"],
+                            activePage: index == currentIndex,
+                            action: pageViewsContent[index]["action"],),
+                      )
+
+                      // PageView(
+                      //   controller: pageController,
+                      //   onPageChanged: (index) {
+                      //     setState(() {
+                      //       //
+                      //       currentIndex = index;
+                      //     });
+                      //   },
+                      //   children: [
+                      //     Padding(
+                      //       padding: const EdgeInsets.all(8.0),
+                      //       child: GestureDetector(
+                      //         onTap: () {
+                      //           //Navigator.pushNamed(context, Routes.LOGIN);
+                      //         },
+                      //         child: Container(
+                      //           decoration: BoxDecoration(
+                      //               image: const DecorationImage(
+                      //                 fit: BoxFit.fill,
+                      //                 //opacity: .9,
+                      //                 image:
+                      //                     AssetImage("assets/images/quiz1.jpg"),
+                      //               ),
+                      //               borderRadius: BorderRadius.circular(20)),
+                      //           child: Column(
+                      //             mainAxisAlignment:
+                      //                 MainAxisAlignment.spaceBetween,
+                      //             crossAxisAlignment: CrossAxisAlignment.start,
+                      //             children: [
+                      //               const Padding(
+                      //                 padding: EdgeInsets.all(8.0),
+                      //                 child: Text(
+                      //                   "QUIZ",
+                      //                   style: TextStyle(
+                      //                     //fontFamily: "Meridian",
+                      //                     fontSize: 34,
+                      //                     fontWeight: FontWeight.w900,
+                      //                     color: Colors.white,
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //               Container(
+                      //                 decoration: const BoxDecoration(
+                      //                     color:
+                      //                         Color.fromARGB(255, 13, 107, 130),
+                      //                     borderRadius: BorderRadius.vertical(
+                      //                         bottom: Radius.circular(20))),
+                      //                 child: const Padding(
+                      //                   padding: EdgeInsets.all(8.0),
+                      //                   child: Text(
+                      //                     "Aprenda de forma divertida e interativa sobre a depressão. Saiba quais são as suas causas e cuidados a ter para não cair nela.",
+                      //                     textAlign: TextAlign.center,
+                      //                     style: TextStyle(color: Colors.white),
+                      //                   ),
+                      //                 ),
+                      //               )
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     Padding(
+                      //       padding: const EdgeInsets.all(8.0),
+                      //       child: GestureDetector(
+                      //         onTap: () {
+                      //           Navigator.pushNamed(context, Routes.TEST_DESC_1);
+                      //         },
+                      //         child: Container(
+                      //           decoration: BoxDecoration(
+                      //               image: const DecorationImage(
+                      //                 //opacity: .9,
+                      //                 fit: BoxFit.fill,
+                      //                 image:
+                      //                     AssetImage("assets/images/teste1.jpg"),
+                      //               ),
+                      //               borderRadius: BorderRadius.circular(20)),
+                      //           child: Column(
+                      //             mainAxisAlignment:
+                      //                 MainAxisAlignment.spaceBetween,
+                      //             crossAxisAlignment: CrossAxisAlignment.start,
+                      //             children: [
+                      //               const Padding(
+                      //                 padding: EdgeInsets.all(8.0),
+                      //                 child: Text(
+                      //                   "TESTE",
+                      //                   style: TextStyle(
+                      //                     fontSize: 34,
+                      //                     fontWeight: FontWeight.w900,
+                      //                     color: Colors.white,
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //               Container(
+                      //                 decoration: BoxDecoration(
+                      //                     color: Colors.brown.shade900,
+                      //                     borderRadius:
+                      //                         const BorderRadius.vertical(
+                      //                             bottom: Radius.circular(20))),
+                      //                 child: const Padding(
+                      //                   padding: EdgeInsets.all(8.0),
+                      //                   child: Text(
+                      //                     "Descubra mais sobre seu bem-estar emocional! Faça o teste agora e entenda melhor seus sentimentos. Seu autocuidado começa aqui!",
+                      //                     textAlign: TextAlign.center,
+                      //                     style: TextStyle(color: Colors.white),
+                      //                   ),
+                      //                 ),
+                      //               )
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     Padding(
+                      //       padding: const EdgeInsets.all(8.0),
+                      //       child: GestureDetector(
+                      //         onTap: () {
+                      //           Navigator.pushNamed(context, Routes.THERAPY);
+                      //         },
+                      //         child: Container(
+                      //           decoration: BoxDecoration(
+                      //               image: const DecorationImage(
+                      //                 fit: BoxFit.fill,
+                      //                 image: AssetImage(
+                      //                     "assets/images/terapia1.jpg"),
+                      //               ),
+                      //               borderRadius: BorderRadius.circular(20)),
+                      //           child: Column(
+                      //             mainAxisAlignment:
+                      //                 MainAxisAlignment.spaceBetween,
+                      //             crossAxisAlignment: CrossAxisAlignment.start,
+                      //             children: [
+                      //               const Padding(
+                      //                 padding: EdgeInsets.all(8.0),
+                      //                 child: Text(
+                      //                   "TERAPIA",
+                      //                   style: TextStyle(
+                      //                     fontSize: 34,
+                      //                     fontWeight: FontWeight.w900,
+                      //                     color: Colors.white,
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //               Container(
+                      //                 decoration: BoxDecoration(
+                      //                     color: Colors.lightGreen.shade800,
+                      //                     borderRadius:
+                      //                         const BorderRadius.vertical(
+                      //                             bottom: Radius.circular(20))),
+                      //                 child: const Padding(
+                      //                   padding: EdgeInsets.all(8.0),
+                      //                   child: Text(
+                      //                     "Cuidar da sua saúde mental é essencial. Nossas terapias oferecem apoio profissional e acolhimento. Dê o primeiro passo para seu bem-estar!",
+                      //                     textAlign: TextAlign.center,
+                      //                     style: TextStyle(color: Colors.white),
+                      //                   ),
+                      //                 ),
+                      //               )
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+
+                      ),
                 ],
               ),
-              // child: Stack(
-              //   children: [
-              //     Image.asset(
-              //       "assets/video.gif",
-              //       fit: BoxFit.fitWidth,
-              //       width: double.infinity,
-              //     ),
-              //     const Padding(
-              //       padding: EdgeInsets.all(7.0),
-              //       child: Center(
-              //         child: Column(
-              //           mainAxisSize: MainAxisSize.min,
-              //           children: [
-              //             Text(
-              //               "Explore, aprenda e cuide da sua saúde mental",
-              //               textAlign: TextAlign.center,
-              //               style: TextStyle(
-              //                   color: Colors.white,
-              //                   fontWeight: FontWeight.bold,
-              //                   fontSize: 25),
-              //             ),
-              //             SizedBox(
-              //               height: 12,
-              //             ),
-              //             Text(
-              //               "Seja bem-vindo! Aqui voçê encontrará apoio, conhecimento e ferramentas para compreender e superar a depressão.",
-              //               style: TextStyle(color: Colors.white),
-              //               textAlign: TextAlign.center,
-              //             )
-              //           ],
-              //         ),
-              //       ),
-              //     )
-              //   ],
-              // ),
             ),
             const StatistcsView(),
             PerfilPage(),
-            PsychologistProfilePage()//DoctorView()
+            PsychologistProfilePage() //DoctorView()
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -347,11 +341,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           currentIndex: index,
           items: [
             BottomNavigationBarItem(
-              backgroundColor: Color.fromARGB(255, 15, 152, 187),
+              backgroundColor: const Color.fromARGB(255, 15, 152, 187),
               label: 'Inicio',
               icon: IconButton(
                 iconSize: 35,
-                icon: Icon(Icons.home),
+                icon: const Icon(Icons.home),
                 onPressed: () {
                   tabController.animateTo(0);
                   setIndex(0);
@@ -359,7 +353,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
             ),
             BottomNavigationBarItem(
-              backgroundColor: Color.fromARGB(255, 15, 152, 187),
+              backgroundColor: const Color.fromARGB(255, 15, 152, 187),
               label: 'Estatística',
               icon: IconButton(
                 iconSize: 35,
@@ -375,11 +369,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
             ),
             BottomNavigationBarItem(
-              backgroundColor: Color.fromARGB(255, 15, 152, 187),
+              backgroundColor: const Color.fromARGB(255, 15, 152, 187),
               label: 'Perfil',
               icon: IconButton(
                 iconSize: 35,
-                icon: Icon(Icons.person),
+                icon: const Icon(Icons.person),
                 onPressed: () {
                   tabController.animateTo(2);
                   setIndex(2);
@@ -387,7 +381,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
             ),
             BottomNavigationBarItem(
-              backgroundColor: Color.fromARGB(255, 15, 152, 187),
+              backgroundColor: const Color.fromARGB(255, 15, 152, 187),
               label: 'Psicólogo',
               icon: IconButton(
                 iconSize: 35,

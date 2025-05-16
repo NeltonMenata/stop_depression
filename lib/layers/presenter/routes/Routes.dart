@@ -13,6 +13,7 @@ import 'package:stop_depression/layers/presenter/ui/test/test_desc_2.dart';
 import 'package:stop_depression/layers/presenter/ui/test/test_page.dart';
 import 'package:stop_depression/layers/presenter/ui/therapy/desafio.dart';
 import 'package:stop_depression/layers/presenter/ui/therapy/tarefas.dart';
+import 'package:stop_depression/layers/presenter/ui/therapy/tecnica_de_respiracao.dart';
 import 'package:stop_depression/layers/presenter/ui/therapy/therapy_page.dart';
 import 'package:stop_depression/layers/presenter/ui/user/user_view.dart';
 
@@ -34,6 +35,7 @@ abstract class Routes {
   static const PERFIL = "/perfil";
   static const AGENDA = "/agenda";
   static const CRIAR = "/criar";
+  static const TECNICA = "/tecnica";
   // Routers for Worker
 
   static Map<String, Widget Function(BuildContext)> routes(
@@ -41,18 +43,19 @@ abstract class Routes {
     return {
       SPLASH: (context) => const SplashPage(),
       HOME: (context) => const HomePage(),
-      LOGIN: (context) => LoginPage(),
+      LOGIN: (context) => const LoginPage(),
       ABOUT: (context) => const AboutPage(),
       THERAPY: (context) => const TherapyPage(),
       TEST: (context) => const TestPage(),
       TEST_DESC_1: (context) => const TestDesc1Page(),
       TEST_DESC_2: (context) => const TestDesc2Page(),
       REGISTER_MOOD: (context) => RegisterMood(),
-      DESAFIO: (context) => DesafioDoBem(),//OrganizarODia(),
+      DESAFIO: (context) => OrganizarODia(),
       SETTINGS: (context) => const SettingsScreen(),
       PERFIL: (context) => PerfilPage(),
       AGENDA: (context) => AgendaDiaria(),
-      CRIAR: (context) => CriarContaPage()
+      CRIAR: (context) => const CriarContaPage(),
+      TECNICA: (context) => BreathingExercise()
     };
   }
 }

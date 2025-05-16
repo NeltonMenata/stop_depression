@@ -10,8 +10,8 @@ class AboutPage extends StatelessWidget {
           title: const Text(
         "Sobre",
       )),
-      body: Column(
-        children: const [
+      body: const Column(
+        children: [
           Padding(
             padding: EdgeInsets.all(12.0),
             child: Text(

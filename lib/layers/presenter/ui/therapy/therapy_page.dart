@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stop_depression/layers/core/open_links.dart';
+//import 'package:stop_depression/layers/core/open_links.dart';
 import 'package:stop_depression/layers/presenter/routes/Routes.dart';
 //import 'package:stop_depression/layers/presenter/routes/Routes.dart';
 //import 'package:stop_depression/layers/presenter/utils/utils.dart';
@@ -21,7 +21,7 @@ class _TherapyPageState extends State<TherapyPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 15, 152, 187),
+        backgroundColor: const Color.fromARGB(255, 15, 152, 187),
         title: const Text(
           'Terapia',
           style: TextStyle(
@@ -40,7 +40,7 @@ class _TherapyPageState extends State<TherapyPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   // TextButton(
@@ -169,6 +169,42 @@ class _TherapyPageState extends State<TherapyPage> {
                   ),
                   const SizedBox(
                     height: 12,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.TECNICA);
+                    },
+                    child: Container(
+                      width: width * multiWidth,
+                      height: width * multiHeight,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: const DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage('assets/images/tecnica.jpeg'),
+                            opacity: .8),
+                      ),
+                      child: Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(.7),
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Colors.black,
+                            ),
+                          ),
+                          child: Text(
+                            'Tecnicas de Respiração',
+                            style: TextStyle(
+                                fontSize: width * .047,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ]),
           ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 class PerfilPage extends StatefulWidget {
@@ -139,7 +138,7 @@ final user = await ParseUser.currentUser() as ParseUser;
               onPressed: () async {
                 // Aqui você pode salvar os dados, enviar para servidor etc.
                 final user = await ParseUser.currentUser() as ParseUser;
-                print(user.username);
+                
                 user
                   ..set("name", nomeController.text)
                   ..set("age", int.parse(idadeController.text))
@@ -154,10 +153,10 @@ final user = await ParseUser.currentUser() as ParseUser;
                   await user.save();
 
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Informações salvas!')),
+                  const SnackBar(content: Text('Informações salvas!')),
                 );
               },
-              child: Text('Salvar'),
+              child: const Text('Salvar'),
             ),
           ],
         ),
