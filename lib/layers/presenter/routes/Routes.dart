@@ -5,7 +5,7 @@ import 'package:stop_depression/layers/presenter/ui/ajustes/ajuste.dart';
 import 'package:stop_depression/layers/presenter/ui/home/home_page.dart';
 import 'package:stop_depression/layers/presenter/ui/login/criar_conta_page.dart';
 import 'package:stop_depression/layers/presenter/ui/login/login_page.dart';
-import 'package:stop_depression/layers/presenter/ui/register_mood/register_mood_page.dart';
+import 'package:stop_depression/layers/presenter/ui/therapy/register_mood/register_mood_page.dart';
 import 'package:stop_depression/layers/presenter/ui/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:stop_depression/layers/presenter/ui/test/test_desc_1.dart';

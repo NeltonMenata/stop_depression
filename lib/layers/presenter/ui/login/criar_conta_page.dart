@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 //import 'package:stop_depression/layers/presenter/routes/Routes.dart';
 import 'package:stop_depression/layers/presenter/ui/login/login_controller.dart';
 import 'package:stop_depression/layers/presenter/utils/utils.dart';
@@ -24,7 +25,7 @@ class _CriarContaPageState extends State<CriarContaPage> {
     final width = MediaQuery.of(context).size.width;
     const paddingLeft = 15.0;
     final paddingTop = height * 0.07;
-    const paddingBottom = 15.0;
+    //const paddingBottom = 15.0;
     final fontSizeTitle = width * .04;
     final fontSizeTitleLabel = width * .045;
 
@@ -46,9 +47,10 @@ class _CriarContaPageState extends State<CriarContaPage> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                        left: paddingLeft,
-                        top: paddingTop,
-                        bottom: paddingBottom),
+                      left: paddingLeft,
+                      top: paddingTop,
+                    //  bottom: paddingBottom,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -62,8 +64,21 @@ class _CriarContaPageState extends State<CriarContaPage> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                        ),
-                        SizedBox(height: height * 0.03),
+                        ).animate(
+                              onPlay: (controller) => controller.repeat(),
+                            )
+                            .scale(
+                              begin: const Offset(1.2, 1.2),
+                              duration: const Duration(seconds: 2),
+                              end: const Offset(.8, .8)
+                            ).then()
+                            .scale(
+                             
+                              begin: const Offset(.8, .8),
+                              duration: const Duration(seconds: 2),
+                              end: const Offset(1.2, 1.2)
+                            ),
+                        //SizedBox(height: height * 0.03),
                       ],
                     ),
                   ),
@@ -224,11 +239,11 @@ class _CriarContaPageState extends State<CriarContaPage> {
                                       setState(() {
                                         isLogin = true;
                                       });
-                                      await LoginController.criarConta(context, username.text, password.text);
+                                      await LoginController.criarConta(context,
+                                          username.text, password.text);
                                       setState(() {
                                         isLogin = false;
                                       });
-                                      
                                     },
                                   ),
                           ),

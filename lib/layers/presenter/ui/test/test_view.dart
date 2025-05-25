@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:stop_depression/layers/presenter/ui/test/test_component.dart';
 import 'package:stop_depression/layers/presenter/ui/test/test_model.dart';
 
@@ -177,6 +178,26 @@ class _TestViewState extends State<TestView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              TestComponent(
+                action: () {
+                  Future.delayed(const Duration(seconds: 0), () {
+                    //print(listTest[currentTest].value);
+                    setState(() {
+                      if (!(currentTest == (listTest.length - 1))) {
+                        currentTest++;
+                      }
+                      int currentValue = 0;
+                      for (var element in listTest) {
+                        currentValue += element.value;
+                      }
+                      resultTest = currentValue;
+                    });
+                    verifyTest(context);
+                  });
+                },
+                listTest[currentTest],
+              ),
+
               Visibility(
                 visible: showProgressMsg,
                 child: Align(
@@ -213,25 +234,6 @@ class _TestViewState extends State<TestView> {
                   ),
                 ),
               ),
-              TestComponent(
-                action: () {
-                  Future.delayed(const Duration(seconds: 0), () {
-                    //print(listTest[currentTest].value);
-                    setState(() {
-                      if (!(currentTest == (listTest.length - 1))) {
-                        currentTest++;
-                      }
-                      int currentValue = 0;
-                      for (var element in listTest) {
-                        currentValue += element.value;
-                      }
-                      resultTest = currentValue;
-                    });
-                    verifyTest(context);
-                  });
-                },
-                listTest[currentTest],
-              ),
 
               const SizedBox(
                 height: 12,
@@ -251,7 +253,7 @@ class _TestViewState extends State<TestView> {
     );
   }
 
-  void verifyTest(BuildContext context) {
+  Future<void> verifyTest(BuildContext context) async {
     if (currentTest == 20) {
       if (resultTest < 13) {
         indexMsg = 0;
@@ -262,56 +264,60 @@ class _TestViewState extends State<TestView> {
       } else {
         indexMsg = 3;
       }
-      Future.delayed(const Duration(milliseconds: 3000), () {
-        showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-                  backgroundColor: indexMsg == 0
+      try {
+        final test = ParseObject("Test");
+        final user = await ParseUser.currentUser() as ParseUser;
+
+        test
+          ..set("user", user)
+          ..set("result", resultTest)
+          ..set("message", msgResult[indexMsg]);
+
+        await test.save();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Resultado do Teste salvo!')),
+        );
+      } catch (e) {
+        print(e.toString());
+      }
+      
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              backgroundColor: indexMsg == 0
+                  ? Colors.greenAccent
+                  : indexMsg == 1
                       ? Colors.greenAccent
-                      : indexMsg == 1
-                          ? Colors.greenAccent
-                          : indexMsg == 2
-                              ? Colors.amber
-                              : Colors.red,
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        "Resultado:",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        msgResult[indexMsg],
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                      : indexMsg == 2
+                          ? Colors.amber
+                          : Colors.red,
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    "Resultado:",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  actions: [
-                    TextButton(
-                      child: const Text("Ok"),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    )
-                  ],
-                ));
-      });
-    } else {
-      // showDialog(
-      //     context: context,
-      //     builder: (context) => AlertDialog(
-      //           content: const Text("Termine o teste para ver o resultado"),
-      //           actions: [
-      //             TextButton(
-      //               child: const Text("Ok"),
-      //               onPressed: () {
-      //                 Navigator.pop(context);
-      //               },
-      //             )
-      //           ],
-      //         ));
+                  Text(
+                    msgResult[indexMsg],
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  child: const Text("Ok"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                )
+              ],
+            ));
     }
+
+    
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:stop_depression/layers/presenter/routes/Routes.dart';
 import 'package:stop_depression/layers/presenter/utils/utils.dart';
 
@@ -24,7 +25,9 @@ class _SplashPageState extends State<SplashPage> {
               Utils.assetLogo,
             ),
           ),
-        ),
+        ).animate(autoPlay: true, onComplete: (controller) {
+          controller.repeat();
+        },).scale(duration: Duration(seconds: 3)),
       ),
     );
   }
