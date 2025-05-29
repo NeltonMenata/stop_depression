@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           "Aprenda de forma divertida e interativa sobre a depressão. Saiba quais são as suas causas e cuidados a ter para não cair nela.",
       "image": "assets/images/quiz1.jpg",
       "color": const Color.fromARGB(255, 13, 107, 130),
-      "action": (BuildContext context) => {}
+      "action": (BuildContext context) => {Navigator.pushNamed(context, Routes.QUIZ)}
     },
     {
       "title": "TESTE",

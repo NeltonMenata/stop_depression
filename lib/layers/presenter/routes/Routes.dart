@@ -5,6 +5,7 @@ import 'package:stop_depression/layers/presenter/ui/ajustes/ajuste.dart';
 import 'package:stop_depression/layers/presenter/ui/home/home_page.dart';
 import 'package:stop_depression/layers/presenter/ui/login/criar_conta_page.dart';
 import 'package:stop_depression/layers/presenter/ui/login/login_page.dart';
+import 'package:stop_depression/layers/presenter/ui/quiz/quiz_page.dart';
 import 'package:stop_depression/layers/presenter/ui/therapy/register_mood/register_mood_page.dart';
 import 'package:stop_depression/layers/presenter/ui/splash/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ abstract class Routes {
   static const AGENDA = "/agenda";
   static const CRIAR = "/criar";
   static const TECNICA = "/tecnica";
+  static const QUIZ = "/quiz";
   // Routers for Worker
 
   static Map<String, Widget Function(BuildContext)> routes(
@@ -55,7 +57,8 @@ abstract class Routes {
       PERFIL: (context) => PerfilPage(),
       AGENDA: (context) => AgendaDiaria(),
       CRIAR: (context) => const CriarContaPage(),
-      TECNICA: (context) => BreathingExercise()
+      TECNICA: (context) => BreathingExercise(),
+      QUIZ: (context) => QuizPage()
     };
   }
 }

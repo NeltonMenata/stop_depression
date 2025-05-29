@@ -48,6 +48,8 @@ dependencies:
   image_picker: ^1.0.8
   parse_server_sdk: ^6.4.0
   flutter_email_sender: ^7.0.0
+  webview_flutter: ^4.8.0
+  
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +81,9 @@ flutter:
     - assets/images/
     - assets/icon/
     - assets/videos/
+    - assets/index/index.html
+    - assets/index/TemplateData/
+    - assets/index/Build/
   
   fonts:
     - family: Meridian
