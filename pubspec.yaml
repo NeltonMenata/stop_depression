@@ -81,9 +81,6 @@ flutter:
     - assets/images/
     - assets/icon/
     - assets/videos/
-    - assets/index/index.html
-    - assets/index/TemplateData/
-    - assets/index/Build/
   
   fonts:
     - family: Meridian

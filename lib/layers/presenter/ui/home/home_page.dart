@@ -5,6 +5,7 @@ import 'package:stop_depression/layers/presenter/ui/home/page_view_item.dart';
 import 'package:stop_depression/layers/presenter/ui/statistcs/statistcs_view.dart';
 import 'package:stop_depression/layers/presenter/ui/user/user_view.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
 class HomePage extends StatefulWidget {
@@ -67,7 +68,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           "Aprenda de forma divertida e interativa sobre a depressão. Saiba quais são as suas causas e cuidados a ter para não cair nela.",
       "image": "assets/images/quiz1.jpg",
       "color": const Color.fromARGB(255, 13, 107, 130),
-      "action": (BuildContext context) => {Navigator.pushNamed(context, Routes.QUIZ)}
+      "action": (BuildContext context) async {
+        // Deep link do app da Bíblia
+        const webUrl =
+            'https://neltonmenata.github.io/quiz/'; // URL alternativa (site)
+        await launchUrl(Uri.parse(webUrl), mode: LaunchMode.inAppBrowserView);
+        return {};
+      }
     },
     {
       "title": "TESTE",
@@ -151,12 +158,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           });
                         },
                         itemBuilder: (context, index) => PageViewItem(
-                            title: pageViewsContent[index]["title"].toString(),
-                            subtitle: pageViewsContent[index]["subtitle"].toString(),
-                            image: pageViewsContent[index]["image"].toString(),
-                            color: pageViewsContent[index]["color"],
-                            activePage: index == currentIndex,
-                            action: pageViewsContent[index]["action"],),
+                          title: pageViewsContent[index]["title"].toString(),
+                          subtitle:
+                              pageViewsContent[index]["subtitle"].toString(),
+                          image: pageViewsContent[index]["image"].toString(),
+                          color: pageViewsContent[index]["color"],
+                          activePage: index == currentIndex,
+                          action: pageViewsContent[index]["action"],
+                        ),
                       )
 
                       // PageView(
