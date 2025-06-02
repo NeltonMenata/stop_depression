@@ -3,13 +3,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 class AgendaDiaria extends StatefulWidget {
+  const AgendaDiaria({super.key});
+
   @override
   _AgendaDiariaState createState() => _AgendaDiariaState();
 }
 
 class _AgendaDiariaState extends State<AgendaDiaria> {
   List<Map<String, dynamic>> tarefas = []; // Lista de tarefas com título e status
-  TextEditingController _controller = TextEditingController(); // Controlador do campo de texto
+  final TextEditingController _controller = TextEditingController(); // Controlador do campo de texto
 
   @override
   void initState() {

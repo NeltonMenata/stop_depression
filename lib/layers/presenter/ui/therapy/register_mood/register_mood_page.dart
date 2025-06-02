@@ -3,6 +3,8 @@ import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:stop_depression/layers/presenter/utils/utils.dart';
 
 class RegisterMood extends StatefulWidget {
+  const RegisterMood({super.key});
+
   @override
   _RegisterMoodState createState() => _RegisterMoodState();
 }
@@ -13,6 +15,8 @@ class _RegisterMoodState extends State<RegisterMood> {
   int setIndex = -1;
   DateTime selectedDate = DateTime.now();
   bool isSave = false;
+
+  int totalRegister = 0;
 
   final TextEditingController descriptionController = TextEditingController();
 
@@ -44,13 +48,54 @@ class _RegisterMoodState extends State<RegisterMood> {
     return response;
   }
 
+  Future<int> getMoodToday() async {
+    final date = DateTime.now();
+    final dateString = date.toIso8601String().substring(0, 10);
+    
+    final user = await ParseUser.currentUser() as ParseUser;
+    final mood = QueryBuilder(ParseObject("Humor"));
+    mood
+      ..whereEqualTo("user", user)
+      ..whereEqualTo("created", dateString)
+      ..setLimit(3);
+      //..whereContains("createdAt", DateTime.now());
+
+    final response = await mood.find();
+    return response.length;
+  }
+
   Future<void> saveMood(int index) async {
+
+    setState(() {
+      isSave = true;
+    });
+
+    final register = await getMoodToday();
+
+    if(register == 2){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text("Atingiu o limite de registo diário!")),
+      );
+      setState(() {
+      isSave = false;
+    });
+      return;
+    }
+
+    final date = DateTime.now();
+    final dateString = date.toIso8601String().substring(0, 10);
+    
     if (selectedMood == -1) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             backgroundColor: Colors.red,
             content: Text("Selecione um emoji de como te sentes hoje!")),
       );
+      setState(() {
+      isSave = false;
+    });
       return;
     }
 
@@ -60,17 +105,18 @@ class _RegisterMoodState extends State<RegisterMood> {
             backgroundColor: Colors.red,
             content: Text("Escreva uma descrição de como foi o seu dia hoje!")),
       );
+      setState(() {
+      isSave = false;
+    });
       return;
     }
-    setState(() {
-      isSave = true;
-    });
     final user = await ParseUser.currentUser() as ParseUser;
     if (selectedMood != -1) {
       final humor = ParseObject("Humor");
       humor.set("title", moods[index]["label"]);
       humor.set("emoji", moods[index]["emoji"]);
       humor.set("user", user);
+      humor.set("created", dateString);
       humor.set("describe", descriptionController.text);
       await humor.save();
       ScaffoldMessenger.of(context).showSnackBar(
@@ -160,7 +206,6 @@ class _RegisterMoodState extends State<RegisterMood> {
                 ),
               ),
             ),
-            
             isSave
                 ? const Center(child: CircularProgressIndicator())
                 : ElevatedButton.icon(
@@ -192,7 +237,7 @@ class _RegisterMoodState extends State<RegisterMood> {
                                       snapshot.data?[index].get(
                                         "emoji",
                                       ),
-                                      style: TextStyle(fontSize: 30),
+                                      style: const TextStyle(fontSize: 30),
                                     ),
                                     title: Text(
                                         snapshot.data?[index].get("title")),

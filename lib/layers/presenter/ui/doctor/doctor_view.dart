@@ -3,6 +3,8 @@ import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 class PsychologistProfilePage extends StatefulWidget {
+  const PsychologistProfilePage({super.key});
+
   @override
   _PsychologistProfilePageState createState() =>
       _PsychologistProfilePageState();
@@ -81,12 +83,16 @@ class _PsychologistProfilePageState extends State<PsychologistProfilePage> {
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
-            const CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage(
-                  'assets/psicologo.jpg'),
-              child: Text("WD", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),), // Coloque uma imagem local ou via rede
-            ),
+          CircleAvatar(
+            radius: 70,
+            
+            child: ClipOval(
+                //borderRadius: BorderRadius.circular(100),
+                //backgroundImage:AssetImage("assets/images/foto_perfil.jpeg",),
+                    
+                child: Image.asset("assets/images/foto_perfil.jpeg", fit: BoxFit.fitWidth,),//Text("WD", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),), // Coloque uma imagem local ou via rede
+              ),
+          ),
             const SizedBox(height: 10),
             const Text("Dra. Winnie de Almeida",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),

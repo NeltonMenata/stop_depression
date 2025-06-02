@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stop_depression/layers/presenter/ui/login/login_controller.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -18,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   void navegarParaCriarConta() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CreateAccountPage()),
+      MaterialPageRoute(builder: (context) => const CreateAccountPage()),
     );
   }
 
@@ -77,6 +79,8 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class CreateAccountPage extends StatefulWidget {
+  const CreateAccountPage({super.key});
+
   @override
   _CreateAccountPageState createState() => _CreateAccountPageState();
 }

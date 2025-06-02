@@ -27,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
           ),
         ).animate(autoPlay: true, onComplete: (controller) {
           controller.repeat();
-        },).scale(duration: Duration(seconds: 3)),
+        },).scale(duration: const Duration(seconds: 3)),
       ),
     );
   }

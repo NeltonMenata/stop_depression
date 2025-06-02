@@ -49,6 +49,7 @@ dependencies:
   parse_server_sdk: ^6.4.0
   flutter_email_sender: ^7.0.0
   webview_flutter: ^4.8.0
+  installed_apps: ^1.6.0
   
 
 dev_dependencies:
@@ -81,11 +82,18 @@ flutter:
     - assets/images/
     - assets/icon/
     - assets/videos/
+    - assets/audio/take.mp3
   
   fonts:
     - family: Meridian
       fonts: 
         - asset: assets/fonts/Meridian.ttf
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins/Poppins-Light.ttf
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,3 +1,4 @@
+import 'package:installed_apps/installed_apps.dart';
 import 'package:stop_depression/layers/presenter/routes/Routes.dart';
 import 'package:stop_depression/layers/presenter/ui/doctor/doctor_view.dart';
 import 'package:stop_depression/layers/presenter/ui/home/drawer.dart';
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   int index = 0;
   List<String> titles = [
-    'Inicio',
+    'Início',
     'Estatísticas',
     'Perfil',
     'Psicólogo',
@@ -69,10 +70,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       "image": "assets/images/quiz1.jpg",
       "color": const Color.fromARGB(255, 13, 107, 130),
       "action": (BuildContext context) async {
-        // Deep link do app da Bíblia
-        const webUrl =
-            'https://neltonmenata.github.io/quiz/'; // URL alternativa (site)
-        await launchUrl(Uri.parse(webUrl), mode: LaunchMode.inAppBrowserView);
+        //Deep link do app da Bíblia
+        // const webUrl =
+        //     'intent://com.android.settings/#Intent;scheme=android-app;end'; // URL alternativa (site)
+        // await launchUrl(Uri.parse(webUrl));
+        // final apps = await InstalledApps.getInstalledApps();
+        // print(apps);
+        // apps.forEach((element) {
+        //   print(element.packageName);
+        // });
+        const appPackageName = "com.LucyGames.DepressoQuiz";
+        await InstalledApps.startApp(appPackageName);
+        //await DeviceApps.openApp(appUrl);
+        // if (await canLaunchUrl(Uri.parse(appUrl))) {
+        //   await launchUrl(Uri.parse(appUrl));
+        // }
         return {};
       }
     },
@@ -125,7 +137,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           title: Text(
             titles[index],
             style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.white),
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
           ),
         ),
         body: TabBarView(
@@ -338,8 +352,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
             ),
             const StatistcsView(),
-            PerfilPage(),
-            PsychologistProfilePage() //DoctorView()
+            const PerfilPage(),
+            const PsychologistProfilePage() //DoctorView()
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -351,7 +365,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           items: [
             BottomNavigationBarItem(
               backgroundColor: const Color.fromARGB(255, 15, 152, 187),
-              label: 'Inicio',
+              label: 'Início',
               icon: IconButton(
                 iconSize: 35,
                 icon: const Icon(Icons.home),

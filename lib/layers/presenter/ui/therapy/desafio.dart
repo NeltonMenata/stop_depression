@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-//import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stop_depression/layers/presenter/ui/therapy/desafios/amor.dart';
+import 'package:stop_depression/layers/presenter/ui/therapy/desafios/autoavaliacao.dart';
+import 'package:stop_depression/layers/presenter/ui/therapy/desafios/coragem.dart';
+import 'package:stop_depression/layers/presenter/ui/therapy/desafios/gratidao.dart';
 import 'dart:convert';
-
 import 'package:stop_depression/layers/presenter/utils/utils.dart';
 
 class OrganizarODia extends StatefulWidget {
+  const OrganizarODia({super.key});
+
   @override
   _OrganizarODiaState createState() => _OrganizarODiaState();
 }
@@ -54,7 +58,7 @@ class _OrganizarODiaState extends State<OrganizarODia> {
 
   Future<void> carregarTarefas() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? tarefasSalvas = prefs.getString('tarefas');
+    String? tarefasSalvas = prefs.getString('desafios');
     if (tarefasSalvas != null) {
       setState(() {
         tarefas = List<Map<String, dynamic>>.from(jsonDecode(tarefasSalvas));
@@ -64,7 +68,7 @@ class _OrganizarODiaState extends State<OrganizarODia> {
 
   Future<void> salvarTarefas() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('tarefas', jsonEncode(tarefas));
+    await prefs.setString('desafios', jsonEncode(tarefas));
   }
 
   void adicionarTarefa() {
@@ -107,132 +111,168 @@ class _OrganizarODiaState extends State<OrganizarODia> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: greenLight,
-        title: const Text("Desafios do bem", style: TextStyle(fontWeight: FontWeight.bold),),
+        title: const Text(
+          "Desafios do bem",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         elevation: 0,
       ),
       backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Column(
+      body: 
+      ListView(
+            //mainAxisSize: MainAxisSize.min,
             children: [
-              
-              const SizedBox(height: 16),
-              if (feitas >= 7)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: LinearProgressIndicator(
-                    value: feitas / total,
-                    backgroundColor: Colors.grey[300],
-                    color: Colors.green,
-                    minHeight: 10,
-                  ),
-                ),
-              if (feitas >= 7)
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                        "Você completou $feitas de $total desafios, continue assim!",
-                        style: const TextStyle(fontSize: 14, color: Colors.black87)),
-                  ),
-                ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: tarefas.length,
-                  itemBuilder: (context, index) {
-                    final tarefa = tarefas[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 12),
-                              decoration: BoxDecoration(
-                                color: Colors.cyan[700],
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Text(
-                                tarefa["titulo"],
-                                style: const TextStyle(
-                                    color: Colors.black87, fontSize: 16),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          // GestureDetector(
-                          //   onTap: () => alternarLembrete(index),
-                          //   child: Icon(
-                          //     Icons.notifications,
-                          //     //color: tarefa["lembrete"]
-                          //       color: Colors.grey
-                          //        // : Colors.black87,
-                          //   ),
-                          // ),
-                          const SizedBox(width: 10),
-                          GestureDetector(
-                            onTap: () => marcarComoFeita(index),
-                            child: CircleAvatar(
-                              backgroundColor: tarefa["feito"]
-                                  ? Colors.green
-                                  : Colors.grey[800],
-                              child: const Icon(Icons.check, color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: ElevatedButton(
-                  onPressed: adicionarTarefa,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.cyan,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Próximo desafio",
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20, bottom: 10),
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Text(
-                    DateTime.now().toIso8601String().substring(0, 10),
-                    style: TextStyle(fontSize: 14, color: Colors.grey[700]),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Text("Estrelas: ${"⭐" * estrelas}",
-                    style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.amber,
-                        fontWeight: FontWeight.bold)),
-              ),
-              const SizedBox(height: 60),
-            ],
-          ),
-                 ],
-      ),
+              SizedBox(height: 20,),
+              GestureDetector(
+              child: Image.asset("assets/images/gratidao.jpeg"),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>GratidaoPage()));
+              },
+            ),
+            GestureDetector(
+              child: Image.asset("assets/images/coragem.jpeg"),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>CoragemPage()));
+              },
+            ),
+            GestureDetector(
+              child: Image.asset("assets/images/amor.jpeg"),
+            onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AmorPage()));
+              },
+            ),
+            GestureDetector(
+              child: Image.asset("assets/images/autoavaliacao.jpeg"),
+            onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AutoavaliacaoPage()));
+              },
+            ),
+          ],)
+      // Stack(
+      //   children: [
+      //     // Column(
+      //     //   children: [
+      //     //     const SizedBox(height: 16),
+      //     //     if (feitas >= 7)
+      //     //       Padding(
+      //     //         padding: const EdgeInsets.symmetric(horizontal: 20),
+      //     //         child: LinearProgressIndicator(
+      //     //           value: feitas / total,
+      //     //           backgroundColor: Colors.grey[300],
+      //     //           color: Colors.green,
+      //     //           minHeight: 10,
+      //     //         ),
+      //     //       ),
+      //     //     if (feitas >= 7)
+      //     //       Padding(
+      //     //         padding:
+      //     //             const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      //     //         child: Align(
+      //     //           alignment: Alignment.centerLeft,
+      //     //           child: Text(
+      //     //               "Você completou $feitas de $total desafios, continue assim!",
+      //     //               style: const TextStyle(
+      //     //                   fontSize: 14, color: Colors.black87)),
+      //     //         ),
+      //     //       ),
+      //     //     Expanded(
+      //     //       child: ListView.builder(
+      //     //         itemCount: tarefas.length,
+      //     //         itemBuilder: (context, index) {
+      //     //           final tarefa = tarefas[index];
+      //     //           return Padding(
+      //     //             padding: const EdgeInsets.symmetric(
+      //     //                 horizontal: 20, vertical: 8),
+      //     //             child: Row(
+      //     //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     //               children: [
+      //     //                 Expanded(
+      //     //                   child: Container(
+      //     //                     padding: const EdgeInsets.symmetric(
+      //     //                         horizontal: 16, vertical: 12),
+      //     //                     decoration: BoxDecoration(
+      //     //                       color: Colors.cyan[700],
+      //     //                       borderRadius: BorderRadius.circular(30),
+      //     //                     ),
+      //     //                     child: Text(
+      //     //                       tarefa["titulo"],
+      //     //                       style: const TextStyle(
+      //     //                           color: Colors.black87, fontSize: 16),
+      //     //                     ),
+      //     //                   ),
+      //     //                 ),
+      //     //                 const SizedBox(width: 10),
+      //     //                 // GestureDetector(
+      //     //                 //   onTap: () => alternarLembrete(index),
+      //     //                 //   child: Icon(
+      //     //                 //     Icons.notifications,
+      //     //                 //     //color: tarefa["lembrete"]
+      //     //                 //       color: Colors.grey
+      //     //                 //        // : Colors.black87,
+      //     //                 //   ),
+      //     //                 // ),
+      //     //                 const SizedBox(width: 10),
+      //     //                 GestureDetector(
+      //     //                   onTap: () => marcarComoFeita(index),
+      //     //                   child: CircleAvatar(
+      //     //                     backgroundColor: tarefa["feito"]
+      //     //                         ? Colors.green
+      //     //                         : Colors.grey[800],
+      //     //                     child:
+      //     //                         const Icon(Icons.check, color: Colors.white),
+      //     //                   ),
+      //     //                 ),
+      //     //               ],
+      //     //             ),
+      //     //           );
+      //     //         },
+      //     //       ),
+      //     //     ),
+      //     //     Padding(
+      //     //       padding:
+      //     //           const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      //     //       child: ElevatedButton(
+      //     //         onPressed: adicionarTarefa,
+      //     //         style: ElevatedButton.styleFrom(
+      //     //           backgroundColor: Colors.cyan,
+      //     //           shape: RoundedRectangleBorder(
+      //     //             borderRadius: BorderRadius.circular(30),
+      //     //           ),
+      //     //           padding: const EdgeInsets.symmetric(vertical: 12),
+      //     //         ),
+      //     //         child: const Center(
+      //     //           child: Text(
+      //     //             "Próximo desafio",
+      //     //             style: TextStyle(fontSize: 16, color: Colors.black),
+      //     //           ),
+      //     //         ),
+      //     //       ),
+      //     //     ),
+      //     //     Padding(
+      //     //       padding: const EdgeInsets.only(right: 20, bottom: 10),
+      //     //       child: Align(
+      //     //         alignment: Alignment.bottomRight,
+      //     //         child: Text(
+      //     //           DateTime.now().toIso8601String().substring(0, 10),
+      //     //           style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+      //     //         ),
+      //     //       ),
+      //     //     ),
+      //     //     Padding(
+      //     //       padding: const EdgeInsets.only(bottom: 10),
+      //     //       child: Text("Estrelas: ${"⭐" * estrelas}",
+      //     //           style: const TextStyle(
+      //     //               fontSize: 18,
+      //     //               color: Colors.amber,
+      //     //               fontWeight: FontWeight.bold)),
+      //     //     ),
+      //     //     const SizedBox(height: 60),
+      //     //   ],
+      //     // ),
+
+          
+      //   ],
+      // ),
     );
   }
 }

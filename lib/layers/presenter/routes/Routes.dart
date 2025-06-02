@@ -51,14 +51,14 @@ abstract class Routes {
       TEST: (context) => const TestPage(),
       TEST_DESC_1: (context) => const TestDesc1Page(),
       TEST_DESC_2: (context) => const TestDesc2Page(),
-      REGISTER_MOOD: (context) => RegisterMood(),
-      DESAFIO: (context) => OrganizarODia(),
+      REGISTER_MOOD: (context) => const RegisterMood(),
+      DESAFIO: (context) => const OrganizarODia(),
       SETTINGS: (context) => const SettingsScreen(),
-      PERFIL: (context) => PerfilPage(),
-      AGENDA: (context) => AgendaDiaria(),
+      PERFIL: (context) => const PerfilPage(),
+      AGENDA: (context) => const AgendaDiaria(),
       CRIAR: (context) => const CriarContaPage(),
-      TECNICA: (context) => BreathingExercise(),
-      QUIZ: (context) => QuizPage()
+      TECNICA: (context) => const BreathingExercise(),
+      QUIZ: (context) => const QuizPage()
     };
   }
 }

@@ -1,10 +1,10 @@
 // import 'package:flutter/material.dart';
- import 'package:flutter_animate/flutter_animate.dart';
+//import 'package:flutter_animate/flutter_animate.dart';
 import 'package:stop_depression/layers/presenter/ui/test/test_model.dart';
 import 'package:flutter/material.dart';
 
 class TestComponent extends StatefulWidget {
-  TestComponent(
+  const TestComponent(
     this.test, {
     super.key,
     required this.action,
@@ -47,6 +47,7 @@ class _TestComponentState extends State<TestComponent>
             padding: const EdgeInsets.all(4.0),
             child: SizedBox(
               width: double.infinity,
+              height: 100,
               child: TextButton(
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -64,29 +65,32 @@ class _TestComponentState extends State<TestComponent>
                 child: Text(
                   widget.test.option1,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black),
                 ),
               ),
             ),
-          )
-              .animate()
-              .moveX(begin: 50, end: 0, duration: 2000.ms)
-              .then()
-              .moveX(begin: -50, end: 0)
-              .animate(
-                //target: animateNotifier.value ? 1 : 0,
-                onPlay: (controller) {
-                  //controller.reverse();
-                },
-              )
-              .moveX(begin: 50, end: 0, duration: 2000.ms)
-              //.hide()
-              .then()
-              //.show(maintain: false)
-              .moveX(begin: -50, end: 0),
+          ),
+              // .animate()
+              // .moveX(begin: 50, end: 0, duration: 2000.ms)
+              // .then()
+              // .moveX(begin: -50, end: 0)
+              // .animate(
+              //   //target: animateNotifier.value ? 1 : 0,
+              //   onPlay: (controller) {
+              //     //controller.reverse();
+              //   },
+              // )
+              // .moveX(begin: 50, end: 0, duration: 2000.ms)
+              // //.hide()
+              // .then()
+              // //.show(maintain: false)
+              // .moveX(begin: -50, end: 0),
           Padding(
             padding: const EdgeInsets.all(4.0),
             child: SizedBox(
+              height: 100,
               width: double.infinity,
               child: TextButton(
                 style: ButtonStyle(
@@ -105,28 +109,32 @@ class _TestComponentState extends State<TestComponent>
                 child: Text(
                   widget.test.option2,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black),
                 ),
               ),
             ),
-          )                    .animate()
-              .moveX(begin: -50, end: 0, duration: 2000.ms)
-              .then()
-              .moveX(begin: 50, end: 0)
-              .animate(
-                //target: animateNotifier.value ? 1 : 0,
-                onPlay: (controller) {
-                  //controller.reverse();
-                },
-              )
-              .moveX(begin: -50, end: 0, duration: 2000.ms)
-              //.hide()
-              .then()
-              //.show(maintain: false)
-              .moveX(begin: 50, end: 0),
+          ),    
+          //                .animate()
+          //     .moveX(begin: -50, end: 0, duration: 2000.ms)
+          //     .then()
+          //     .moveX(begin: 50, end: 0)
+          //     .animate(
+          //       //target: animateNotifier.value ? 1 : 0,
+          //       onPlay: (controller) {
+          //         //controller.reverse();
+          //       },
+          //     )
+          //     .moveX(begin: -50, end: 0, duration: 2000.ms)
+          //     //.hide()
+          //     .then()
+          //     //.show(maintain: false)
+          //     .moveX(begin: 50, end: 0),
           Padding(
             padding: const EdgeInsets.all(4.0),
             child: SizedBox(
+              height: 100,
               width: double.infinity,
               child: TextButton(
                 style: ButtonStyle(
@@ -145,28 +153,31 @@ class _TestComponentState extends State<TestComponent>
                 child: Text(
                   widget.test.option3,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black),
                 ),
               ),
             ),
-          )
-                                  .animate()
-              .moveX(begin: 50, end: 0, duration: 2000.ms)
-              .then()
-              .moveX(begin: -50, end: 0).animate(
-                //target: animateNotifier.value ? 1 : 0,
-                onPlay: (controller) {
-                  //controller.reverse();
-                },
-              )
-              .moveX(begin: 50, end: 0, duration: 2000.ms)
-              //.hide()
-              .then()
-              //.show(maintain: false)
-              .moveX(begin: -50, end: 0),
+          ),
+              //                     .animate()
+              // .moveX(begin: 50, end: 0, duration: 2000.ms)
+              // .then()
+              // .moveX(begin: -50, end: 0).animate(
+              //   //target: animateNotifier.value ? 1 : 0,
+              //   onPlay: (controller) {
+              //     //controller.reverse();
+              //   },
+              // )
+              // .moveX(begin: 50, end: 0, duration: 2000.ms)
+              // //.hide()
+              // .then()
+              // //.show(maintain: false)
+              // .moveX(begin: -50, end: 0),
           Padding(
             padding: const EdgeInsets.all(4.0),
             child: SizedBox(
+              height: 100,
               width: double.infinity,
               child: TextButton(
                 style: ButtonStyle(
@@ -184,25 +195,28 @@ class _TestComponentState extends State<TestComponent>
                 child: Text(
                   widget.test.option4,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black),
                 ),
               ),
             ),
-          )                    .animate()
-              .moveX(begin: -50, end: 0, duration: 2000.ms)
-              .then()
-              .moveX(begin: 50, end: 0)
-              .animate(
-                //target: animateNotifier.value ? 1 : 0,
-                onPlay: (controller) {
-                  //controller.reverse();
-                },
-              )
-              .moveX(begin: -50, end: 0, duration: 2000.ms)
-              //.hide()
-              .then()
-              //.show(maintain: false)
-              .moveX(begin: 50, end: 0),
+          )             
+              //    .animate()
+              // .moveX(begin: -50, end: 0, duration: 2000.ms)
+              // .then()
+              // .moveX(begin: 50, end: 0)
+              // .animate(
+              //   //target: animateNotifier.value ? 1 : 0,
+              //   onPlay: (controller) {
+              //     //controller.reverse();
+              //   },
+              // )
+              // .moveX(begin: -50, end: 0, duration: 2000.ms)
+              // //.hide()
+              // .then()
+              // //.show(maintain: false)
+              // .moveX(begin: 50, end: 0),
         ],
       ),
     );
@@ -327,8 +341,9 @@ class _TestViewState extends State<TestView> with TickerProviderStateMixin {
                       if (currentTest < listTest.length - 1) {
                         currentTest++;
                         showProgressMsg = [1, 6, 10, 16].contains(currentTest);
-                        if (currentTest == 6) progressMsg = "Continue";
-                        else if (currentTest == 10) progressMsg = "Já falta pouco 👏🏽";
+                        if (currentTest == 6) {
+                          progressMsg = "Continue";
+                        } else if (currentTest == 10) progressMsg = "Já falta pouco 👏🏽";
                         else if (currentTest == 16) progressMsg = "Está quase terminando";
                       }
 

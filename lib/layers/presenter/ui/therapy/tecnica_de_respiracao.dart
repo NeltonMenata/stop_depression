@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:stop_depression/layers/presenter/utils/utils.dart';
 
 class BreathingExercise extends StatefulWidget {
+  const BreathingExercise({super.key});
+
   @override
   _BreathingExerciseState createState() => _BreathingExerciseState();
 }

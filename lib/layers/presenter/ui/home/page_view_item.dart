@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PageViewItem extends StatefulWidget {
-  PageViewItem({
+  const PageViewItem({
     super.key,
     required this.title,
     required this.subtitle,
@@ -64,7 +64,7 @@ class _PageViewItemState extends State<PageViewItem> {
                 child: Text(
                   widget.title,
                   style: const TextStyle(
-                    //fontFamily: "Meridian",
+                    fontFamily: "Poppins",
                     fontSize: 34,
                     fontWeight: FontWeight.w900,
                     color: Colors.white,
@@ -81,7 +81,9 @@ class _PageViewItemState extends State<PageViewItem> {
                   child: Text(
                     widget.subtitle,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                      color: Colors.white),
                   ),
                 ),
               )

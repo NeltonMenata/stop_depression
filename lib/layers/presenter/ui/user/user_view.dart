@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 class PerfilPage extends StatefulWidget {
+  const PerfilPage({super.key});
+
   @override
   _PerfilPageState createState() => _PerfilPageState();
 }

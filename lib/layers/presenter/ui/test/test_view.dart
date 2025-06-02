@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:stop_depression/layers/presenter/ui/test/test_component.dart';
 import 'package:stop_depression/layers/presenter/ui/test/test_model.dart';
+import 'package:stop_depression/layers/presenter/utils/utils.dart';
 
 class TestView extends StatefulWidget {
   const TestView({super.key});
@@ -47,8 +48,12 @@ class _TestViewState extends State<TestView> {
         "Eu me sinto culpado grande parte do tempo",
         "Eu me sinto culpado na maior parte do tempo",
         "Eu me sinto sempre culpado"),
-    TestModel("Não acho que esteja sendo punido", "Acho que posso ser punido",
-        "Creio que vou ser punido", "Acho que estou sendo punido"),
+    TestModel(
+      "Não acho que esteja sendo punido",
+      "Acho que posso ser punido",
+      "Creio que vou ser punido",
+      "Acho que estou sendo punido",
+    ),
     TestModel(
         "Não me sinto decepcionado comigo mesmo",
         "Estou decepcionado comigo mesmo",
@@ -129,37 +134,39 @@ class _TestViewState extends State<TestView> {
   int resultTest = 0;
 
   final msgResult = [
-    "Seus sintomas indicam melancolia, algo passageiro. Atividades prazerosas, exercícios, sono regulado e apoio emocional podem ajudar. Vamos acompanhar e, se precisar, ajustamos o cuidado juntos.",
-    "Você apresenta sinais de depressão leve, mas com mudanças no estilo de vida, como exercícios, boa alimentação, sono regulado e apoio emocional, é possível melhorar significativamente. Vamos superar juntos.",
-    "Você tem sintomas de depressão moderada, mas com terapia, rotina saudável, atividades prazerosas e apoio, ter uma alimentação saudável é possível melhorar. Vamos trabalhar juntos para encontrar o melhor caminho para você.",
-    "Seus sintomas são mais intensos, você precisa de ajuda de um profissional, contacte imediatamente o nosso psicólogo. Com acompanhamento próximo, terapia e suporte adequado, há caminhos para você se sentir melhor. Vamos enfrentar isso juntos, passo a passo."
+    "Seus sintomas indicam melancolia, algo passageiro. Atividades prazerosas, exercícios, sono regulado e apoio emocional podem ajudar. Vamos acompanhar e, se precisar, ajustamos o cuidado juntos.",
+    "Você apresenta sinais de depressão leve, mas com mudanças no estilo de vida, como exercícios, boa alimentação, sono regulado e apoio emocional, é possível melhorar significativamente. Vamos superar juntos.",
+    "Você tem sintomas de depressão moderada, mas com terapia, rotina saudável, atividades prazerosas e apoio, ter uma alimentação saudável é possível melhorar. Vamos trabalhar juntos para encontrar o melhor caminho para você.",
+    "Seus sintomas são mais intensos, você precisa de ajuda de um profissional, contacte imediatamente o nosso psicólogo. Com acompanhamento próximo, terapia e suporte adequado, há caminhos para você se sentir melhor. Vamos enfrentar isso juntos, passo a passo."
   ];
 
   int indexMsg = 0;
 
   String progressMsg = "Você está indo bem 😊";
   bool showProgressMsg = false;
+  String showDoctor = "";
+  bool isShowDoctor = false;
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     if (currentTest == 1) {
       setState(() {
-        showProgressMsg = true;
+        //showProgressMsg = true;
       });
     } else if (currentTest == 6) {
       setState(() {
-        progressMsg = "Continue";
+        progressMsg = "Leia as questões com atenção";
         showProgressMsg = true;
       });
     } else if (currentTest == 10) {
       setState(() {
-        progressMsg = "Já falta pouco 👏🏽";
+        progressMsg = "Responda com calma";
         showProgressMsg = true;
       });
     } else if (currentTest == 16) {
       setState(() {
-        progressMsg = "Está quase terminando";
+        progressMsg = "Não precisa ter pressa!";
         showProgressMsg = true;
       });
     } else {
@@ -168,8 +175,9 @@ class _TestViewState extends State<TestView> {
       });
     }
 
-    return Stack(
-      //mainAxisSize: MainAxisSize.min,
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           width: double.infinity,
@@ -197,7 +205,6 @@ class _TestViewState extends State<TestView> {
                 },
                 listTest[currentTest],
               ),
-
               Visibility(
                 visible: showProgressMsg,
                 child: Align(
@@ -238,17 +245,38 @@ class _TestViewState extends State<TestView> {
               const SizedBox(
                 height: 12,
               ),
-              //Text("Resultado: ${resultTest}"),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     //showAboutDialog(context: context,);
-              //     verifyTest(context);
-              //   },
-              //   child: const Text("Resultado do Teste"),
-              // )
             ],
           ),
         ),
+
+              Visibility(
+                visible: currentTest == 20 && resultTest >= 14 && isShowDoctor,
+                child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          print("############ clicou ##########");
+                          setState(() {
+                            showProgressMsg = false;
+                          });
+                        },
+                        child: Container(
+                            
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(color: greenLight,
+                            borderRadius: BorderRadius.circular(15)
+                            ),
+                            child: Text(
+                              showDoctor,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  height: .95,
+                                  color: Colors.white,
+                                  fontSize: 16),
+                            )),
+                      ),
+                    ),
+              ),
       ],
     );
   }
@@ -281,43 +309,46 @@ class _TestViewState extends State<TestView> {
       } catch (e) {
         print(e.toString());
       }
-      
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              backgroundColor: indexMsg == 0
-                  ? Colors.greenAccent
-                  : indexMsg == 1
-                      ? Colors.greenAccent
-                      : indexMsg == 2
-                          ? Colors.amber
-                          : Colors.red,
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    "Resultado:",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    msgResult[indexMsg],
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  child: const Text("Ok"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                )
-              ],
-            ));
-    }
 
-    
+      setState(() {
+        showDoctor = "Contacte a Dra. Winnie";
+        isShowDoctor = true;
+      });
+
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                backgroundColor: indexMsg == 0
+                    ? Colors.greenAccent
+                    : indexMsg == 1
+                        ? Colors.yellowAccent
+                        : indexMsg == 2
+                            ? Colors.orangeAccent
+                            : Colors.redAccent,
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      "Resultado:",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      msgResult[indexMsg],
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    child: const Text("Ok"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ));
+    }
   }
 }

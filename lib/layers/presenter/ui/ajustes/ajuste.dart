@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 
 // Serviço de Notificações
@@ -72,8 +73,12 @@ class AppSettings extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleSound() {
+  void toggleSound() async{
     isSoundOn = !isSoundOn;
+    if(!isSoundOn){
+      final audio = AudioPlayer();
+      await audio.stop();
+    }    
     notifyListeners();
   }
 
