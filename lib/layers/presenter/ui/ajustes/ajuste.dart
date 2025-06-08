@@ -134,12 +134,12 @@ class SettingsScreen extends StatelessWidget {
               onChanged: (value) => settings.toggleDarkMode(),
             ),
             const Divider(),
-            SwitchListTile(
-              title: const Text('Som Ativado'),
-              value: settings.isSoundOn,
-              onChanged: (value) => settings.toggleSound(),
-            ),
-            const Divider(),
+            // SwitchListTile(
+            //   title: const Text('Som Ativado'),
+            //   value: settings.isSoundOn,
+            //   onChanged: (value) => settings.toggleSound(),
+            // ),
+            // const Divider(),
             SwitchListTile(
               title: const Text('Notificações e Lembretes Diários'),
               value: settings.isNotificationOn,

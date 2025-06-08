@@ -16,4 +16,20 @@ abstract class Back4app {
       liveQueryUrl: liveQueryUrl,
     );
   }
+
+  static Future<void> initialize2() async {
+
+    const keyApplicationId = "VnGKlMPUyTuPLEFsI9eXTF49H4ssfds1dcFVC6cx";
+    const keyClientKey = "xfOHnYrFyybjNeDnADkaoa9pBZi1t8RypSI8tyFT";
+    const keyParseServerUrl = "https://parseapi.back4app.com";
+    const liveQueryUrl = "https://apupueventos.b4a.io";
+
+    await Parse().initialize(
+      keyApplicationId,
+      keyParseServerUrl,
+      clientKey: keyClientKey,
+      autoSendSessionId: true,
+      liveQueryUrl: liveQueryUrl,
+    );
+  }
 }

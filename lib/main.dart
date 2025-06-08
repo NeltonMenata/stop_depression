@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().init(); // Inicializa notificações
   Animate.restartOnHotReload = true;
-  await Back4app.initialize();
+  await Back4app.initialize2();
   runApp(
     ChangeNotifierProvider(
       create: (_) => AppSettings(),
